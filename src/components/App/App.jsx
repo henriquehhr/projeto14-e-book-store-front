@@ -2,11 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 import UserContext from "../../contexts/UserContext.js";
+import SignUpPage from "../pages/SignUpPage/SignUpPage.jsx";
+import SignInPage from "../pages/SignInPage/SigInPage.jsx";
 import "../../assets/reset.css";
 
 export default function App() {
 
-    const authToken = useRef(JSON.parse(localStorage.getItem("secret-key"))?.token);
+    const localToken = localStorage.getItem("secret-key");
+    const authToken = useRef(localToken ? JSON.parse(localToken) : null);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -14,7 +17,7 @@ export default function App() {
 
     useEffect(() => {
         //TODO checar se o authToken é válido
-        if (authToken.current) {
+        if (authToken?.current) {
             if (location.pathname == "/login" || location.pathname == "/cadastro")
                 navigate("/");
             else
@@ -28,12 +31,12 @@ export default function App() {
     return (
         <UserContext.Provider value={contextValue}>
             <Routes>
-                <Route path="/" element={<>Página</>} />
-                <Route path="/login" element={<>Página</>} />
-                <Route path="/cadastro" element={<>Página</>} />
-                <Route path="/livro/:nomeLivro" element={<>Página</>} />
-                <Route path="/carrinho" element={<>Página</>} />
-                <Route path="/finalizar-compra" element={<>Página</>} />
+                <Route path="/" element={<>Página inicial- Lista de livros</>} />
+                <Route path="/login" element={<SignInPage />} />
+                <Route path="/cadastro" element={<SignUpPage />} />
+                <Route path="/livro/:nomeLivro" element={<>Página do livro</>} />
+                <Route path="/carrinho" element={<>Carrinho de compra</>} />
+                <Route path="/finalizar-compra" element={<>Finalizar compra</>} />
             </Routes>
         </UserContext.Provider>
     );
