@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';

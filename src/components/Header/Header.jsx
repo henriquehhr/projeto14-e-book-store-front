@@ -12,12 +12,17 @@ export default function Header() {
         <$Header>
             {authToken?.current ? (
                 <>
-                    <h1>Olá</h1>
+                    <Link className="link" to="/">
+                        <h1>DrivenBooks</h1>
+                    </Link>
                     <nav>
                         <ul>
                             <li>
-                                <Link className="link" to="/">
-                                    Todos os livros
+                                <span className="greeting">Olá, Fulano</span>
+                            </li>
+                            <li>
+                                <Link className="link" to="#">
+                                    Meus pedidos
                                 </Link>
                             </li>
                             <li>
@@ -30,7 +35,9 @@ export default function Header() {
                 </>
             ) : (
                 <>
-                    <h1>DrivenBooks</h1>
+                    <Link className="link" to="/">
+                        <h1>DrivenBooks</h1>
+                    </Link>
                     <nav>
                         <ul>
                             <li>
@@ -40,12 +47,7 @@ export default function Header() {
                             </li>
                             <li>
                                 <Link className="link" to="/cadastro">
-                                    Cadastro
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className="link" to="/">
-                                    Todos os livros
+                                    Cadastre-se
                                 </Link>
                             </li>
                             <li>

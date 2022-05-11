@@ -14,6 +14,16 @@ export const $Header = styled.header`
         font-weight: bold;
     }
 
+    .link {
+        text-decoration: none;
+        color: #000;
+        cursor: pointer;
+    }
+
+    .greeting {
+        margin-right: 20px;
+    }
+
     nav {
         display: flex;
         flex-direction: row;
@@ -38,12 +48,6 @@ export const $Header = styled.header`
                 color: #000;
                 font-size: 1.2rem;
                 font-weight: bold;
-            }
-
-            .link {
-                text-decoration: none;
-                color: #000;
-                cursor: pointer;
             }
         }
     }
