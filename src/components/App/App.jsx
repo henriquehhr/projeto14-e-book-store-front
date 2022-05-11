@@ -5,6 +5,7 @@ import UserContext from '../../contexts/UserContext.js';
 import SignUpPage from '../pages/SignUpPage/SignUpPage.jsx';
 import SignInPage from '../pages/SignInPage/SigInPage.jsx';
 import BookPage from '../pages/BookPage/BookPage.jsx';
+import Header from '../Header/Header.jsx';
 import '../../assets/reset.css';
 
 export default function App() {
@@ -19,18 +20,24 @@ export default function App() {
         //TODO checar se o authToken é válido
         if (authToken?.current) {
             if (
-                location.pathname == '/login' ||
-                location.pathname == '/cadastro'
+                location.pathname === '/login' ||
+                location.pathname === '/cadastro'
             )
                 navigate('/');
             else navigate(location.pathname);
         } else {
-            if (location.pathname == '/finalizar-compra') navigate('/');
+            if (location.pathname === '/finalizar-compra') navigate('/');
         }
     }, []);
 
     return (
         <UserContext.Provider value={contextValue}>
+            {location.pathname === '/login' ||
+            location.pathname === '/cadastro' ? (
+                <></>
+            ) : (
+                <Header />
+            )}
             <Routes>
                 <Route
                     path="/"
