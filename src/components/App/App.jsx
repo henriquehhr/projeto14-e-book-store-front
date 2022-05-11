@@ -4,7 +4,9 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext.js';
 import SignUpPage from '../pages/SignUpPage/SignUpPage.jsx';
 import SignInPage from '../pages/SignInPage/SigInPage.jsx';
+import HomePage from '../pages/HomePage/HomePage.jsx';
 import BookPage from '../pages/BookPage/BookPage.jsx';
+
 import '../../assets/reset.css';
 
 export default function App() {
@@ -19,23 +21,21 @@ export default function App() {
         //TODO checar se o authToken é válido
         if (authToken?.current) {
             if (
-                location.pathname == '/login' ||
-                location.pathname == '/cadastro'
+              location.pathname === '/login' ||
+              location.pathname === '/cadastro'
             )
                 navigate('/');
             else navigate(location.pathname);
         } else {
-            if (location.pathname == '/finalizar-compra') navigate('/');
+            if (location.pathname === '/finalizar-compra') navigate('/');
+
         }
     }, []);
 
     return (
         <UserContext.Provider value={contextValue}>
             <Routes>
-                <Route
-                    path="/"
-                    element={<>Página inicial- Lista de livros</>}
-                />
+                <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<SignInPage />} />
                 <Route path="/cadastro" element={<SignUpPage />} />
                 <Route path="/livro/:idLivro" element={<BookPage />} />
