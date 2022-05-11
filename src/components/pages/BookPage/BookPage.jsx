@@ -5,6 +5,7 @@ import axios from 'axios';
 import { $Button } from '../../../globalStyles/globalStyles.js';
 import { $BookPage } from './style.js';
 
+
 export default function BookPage() {
     const { idLivro } = useParams();
     const [book, setBook] = useState(null);
