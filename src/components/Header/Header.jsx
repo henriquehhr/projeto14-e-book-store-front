@@ -1,34 +1,58 @@
-import styled from 'styled-components';
+import { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+
+import UserContext from '../../contexts/UserContext.js';
+import { $Header } from './style.js';
 
 export default function Header() {
+    const { authToken } = useContext(UserContext);
+
     return (
         <$Header>
-            <h1>Driven-books</h1>
+            {authToken?.current ? (
+                <>
+                    <h1>Olá</h1>
+                    <nav>
+                        <ul>
+                            <li>
+                                <Link className="link" to="/">
+                                    Todos os livros
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="link" to="/carrinho">
+                                    <AiOutlineShoppingCart />
+                                </Link>
+                            </li>
+                        </ul>
+                    </nav>
+                </>
+            ) : (
+                <>
+                    <h1>DrivenBooks</h1>
+                    <nav>
+                        <ul>
+                            <li>
+                                <Link className="link" to="/login">
+                                    Login
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="link" to="/cadastro">
+                                    Cadastro
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="link" to="/carrinho">
+                                    <AiOutlineShoppingCart />
+                                </Link>
+                            </li>
+                        </ul>
+                    </nav>
+                </>
+            )}
+            {/* <h1>Driven-books</h1> */}
         </$Header>
     );
 }
-
-const $Header = styled.header`
-    z-index: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-    padding: 20px;
-
-    h1 {
-        font-size: 2rem;
-        font-weight: bold;
-    }
-
-    @media (max-width: 600px) {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        h1 {
-            font-size: 1.5rem;
-        }
-    }
-`;
