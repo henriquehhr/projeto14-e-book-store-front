@@ -21,6 +21,11 @@ export default function BookPage() {
             });
     }
 
+    function addToCart() {
+        // TODO: falta implementar o carrinho
+        console.log('Added to cart');
+    }
+
     useEffect(
         () => {
             getBook();
@@ -39,7 +44,10 @@ export default function BookPage() {
                         <p>{book.author}</p>
                         <p>{book.description}</p>
                         <p>Nº Paginas: {book.pages}</p>
-                        <$Button className="small add-to-cart">
+                        <$Button
+                            onClick={() => addToCart()}
+                            className="small add-to-cart"
+                        >
                             Adicionar ao Carrinho
                         </$Button>
                     </div>
