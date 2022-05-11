@@ -44,6 +44,11 @@ export default function Header() {
                                 </Link>
                             </li>
                             <li>
+                                <Link className="link" to="/">
+                                    Todos os livros
+                                </Link>
+                            </li>
+                            <li>
                                 <Link className="link" to="/carrinho">
                                     <AiOutlineShoppingCart />
                                 </Link>
