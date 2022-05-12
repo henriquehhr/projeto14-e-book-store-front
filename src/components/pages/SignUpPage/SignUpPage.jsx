@@ -19,7 +19,7 @@ export default function SignUpPage() {
         setDisabled(true);
         const url = "http://localhost:5000/signup";
         const promisse = axios.post(url, singinInfo);
-        promisse.then(() => navigate("/"));
+        promisse.then(() => navigate("/login"));
         promisse.catch(() => {
             setDisabled(false);
             alert("Erro no cadastro. Tente novamente.");

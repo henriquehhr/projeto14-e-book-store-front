@@ -3,12 +3,14 @@ import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { BsCartPlus } from 'react-icons/bs';
+import UserContext from "../../../contexts/UserContext.js";
 
 import { $HomePage } from './style.js';
 
 export default function HomePage() {
     const [books, setBooks] = useState(null);
     const navigate = useNavigate();
+    const {authToken} = useContext(UserContext);
 
     function getBooks() {
         const url = `http://localhost:5000/books`;
@@ -22,9 +24,22 @@ export default function HomePage() {
             });
     }
 
-    function addToCart() {
-        // TODO: falta implementar o carrinho
-        console.log('Added to cart');
+    function addToCart(bookId) {
+        console.log(authToken);
+        if(authToken.current) {
+            //TODO somar o carrinho do localStorage com o carrinho do BD
+            const header = {
+                headers: {"Authorization": `Bearer ${authToken.current}`}
+            };
+            const booksId = [bookId];
+            const promisse = axios.post("http://localhost:5000/shopping-carts",{booksId}, header);
+            promisse.then(response => console.log(response.data));
+            return;
+        }
+        const localStorageCartJSON = localStorage.getItem("local storage cart"); 
+        let localStorageCart = localStorageCartJSON ? JSON.parse(localStorageCartJSON) : [];
+        localStorageCart.push(bookId);
+        localStorage.setItem("local storage cart", JSON.stringify(localStorageCart));
     }
 
     useEffect(
@@ -66,7 +81,7 @@ export default function HomePage() {
                             <BsCartPlus
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    addToCart();
+                                    addToCart(book._id);
                                 }}
                                 className=" add-to-cart"
                             />
