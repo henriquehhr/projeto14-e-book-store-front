@@ -27,7 +27,6 @@ export default function LoginPage() {
         const promisse = axios.post(url, loginInfo);
         promisse.then((response) => {
             console.log(response.data);
-            console.log(response);
             localStorage.setItem('secret-key', JSON.stringify(response.data));
             authToken.current = response.data;
             navigate('/');
