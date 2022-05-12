@@ -1,15 +1,15 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const $Button = styled.button`
     border: none;
-    background: #52B6FF;
-    color: #FFFFFF;
+    background: #52b6ff;
+    color: #ffffff;
     border-radius: 5px;
     text-align: center;
 
     &.inverted-color {
-        background: #FFFFFF;
-        color: #52B6FF;
+        background: #ffffff;
+        color: #52b6ff;
     }
 
     :disabled {
@@ -40,12 +40,11 @@ export const $Button = styled.button`
         width: 40px;
         font-size: 27px;
     }
-
 `;
 
 export const $Input = styled.input`
-    background: #FFFFFF;
-    border: 1px solid #D5D5D5;
+    background: #ffffff;
+    border: 1px solid #d5d5d5;
     box-sizing: border-box;
     border-radius: 5px;
     font-size: 20px;
@@ -53,16 +52,20 @@ export const $Input = styled.input`
     color: #666666;
     height: 45px;
     padding-left: 10px;
-    transition: all .3s ease-out;
+    outline: none;
+    transition: all 0.3s ease-out;
 
+    &.error {
+        border: 1px solid #ff0000;
+    }
 
     :disabled {
-        background-color: #F2F2F2;
-        color: #AFAFAF;
+        background-color: #f2f2f2;
+        color: #afafaf;
     }
 
     ::placeholder {
-        color: #DBDBDB;
+        color: #dbdbdb;
     }
 `;
 
@@ -80,30 +83,30 @@ export const $WeekButton = styled.button`
     font-size: 20px;
     height: 30px;
     width: 30px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     transition: all 0.3s ease-out;
 
     &.selected {
-        border-color: #CFCFCF;
-        background-color: #CFCFCF;
-        color: #FFFFFF;
+        border-color: #cfcfcf;
+        background-color: #cfcfcf;
+        color: #ffffff;
     }
 `;
 
 export const $LogoImg = styled.img`
     aspect-ratio: 332 / 196;
     height: auto;
-    Width : 180px;
+    width: 180px;
 `;
 
 export const $H2 = styled.h2`
     font-size: 22.976px;
     line-height: 29px;
-    color: #126BA5;
+    color: #126ba5;
 `;
 
 export const $Main = styled.main`
-    background-color: #F2F2F2;
+    background-color: #f2f2f2;
     padding: 92px 18px 100px 18px;
     min-height: 100vh;
 `;
