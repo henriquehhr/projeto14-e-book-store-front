@@ -37,7 +37,7 @@ export const $BookPage = styled.div`
     }
 
     @media (max-width: 600px) {
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: center;
         justify-content: center;
 

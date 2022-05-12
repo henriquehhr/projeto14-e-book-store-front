@@ -30,7 +30,7 @@ export default function SignUpPage() {
         setDisabled(true);
         const url = 'http://localhost:5000/signup';
         const promisse = axios.post(url, singupInfo);
-        promisse.then(() => navigate('/'));
+        promisse.then(() => navigate('/login'));
         promisse.catch((error) => {
             setDisabled(false);
             alert(error.response.data);
