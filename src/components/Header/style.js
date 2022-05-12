@@ -21,7 +21,20 @@ export const $Header = styled.header`
     }
 
     .greeting {
+        position: relative;
         margin-right: 20px;
+        display: flex;
+        align-items: center;
+
+        .dropdown-menu {
+            position: absolute;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            top: 100%;
+            width: 100%;
+            background-color: #fafafa;
+        }
     }
 
     nav {
