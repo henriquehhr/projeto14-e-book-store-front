@@ -23,6 +23,15 @@ export default function LoginPage() {
         promisse.then(response => {
             localStorage.setItem("secret-key", JSON.stringify(response.data));
             authToken.current = response.data;
+            const localStorageCartJSON = localStorage.getItem("local storage cart"); 
+            let localStorageCart = localStorageCartJSON ? JSON.parse(localStorageCartJSON) : null;
+            if(localStorageCart) {
+                const header = {
+                    headers: {"Authorization": `Bearer ${authToken.current}`}
+                };
+                const promisse = axios.post("http://localhost:5000/shopping-carts",{booksId: localStorageCart}, header);
+                promisse.then(() => localStorage.removeItem("local storage cart"));
+            }
             navigate("/");
         });
         promisse.catch(() => {
