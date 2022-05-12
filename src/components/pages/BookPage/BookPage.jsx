@@ -1,10 +1,10 @@
+/* eslint-disable react/jsx-pascal-case */
 import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import { $Button } from '../../../globalStyles/globalStyles.js';
 import { $BookPage } from './style.js';
-
 
 export default function BookPage() {
     const { idLivro } = useParams();
