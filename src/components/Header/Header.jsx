@@ -1,90 +1,131 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AiOutlineLogout, AiOutlineShoppingCart } from 'react-icons/ai';
-import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
+import {
+    AiOutlineShopping,
+    AiOutlineUser,
+    AiOutlineLogin,
+} from 'react-icons/ai';
 
 import UserContext from '../../contexts/UserContext.js';
 import { $Header } from './style.js';
 
 export default function Header() {
     const { authToken } = useContext(UserContext);
-    const [open, setOpen] = useState(false);
+    const [currentDropdown, setCurrentDropdown] = useState(null);
+    const navigate = useNavigate();
+
+    function logout() {
+        localStorage.removeItem('secret-key');
+        navigate('/');
+        window.location.reload();
+    }
 
     return (
         <$Header>
+            <Link className="link " to="/">
+                <h1 className="title">DrivenBooks</h1>
+            </Link>
             {authToken?.current ? (
-                <>
-                    <Link className="link" to="/">
-                        <h1>DrivenBooks</h1>
-                    </Link>
-                    <nav>
-                        <ul>
-                            <li>
-                                <span
-                                    className="greeting"
-                                    onClick={() => setOpen(!open)}
-                                >
-                                    Olá, Fulano{' '}
-                                    {open ? <FaAngleUp /> : <FaAngleDown />}
-                                    {open && <DropdownMenu />}
-                                </span>
-                            </li>
-                            <li>
-                                <Link className="link" to="#">
-                                    Meus pedidos
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className="link" to="/carrinho">
-                                    <AiOutlineShoppingCart />
-                                </Link>
-                            </li>
-                        </ul>
-                    </nav>
-                </>
+                <nav>
+                    <ul>
+                        <li>
+                            <span className="greeting">Olá, Fulano</span>
+                        </li>
+                        <li>
+                            <DropdownMenu
+                                currentDropdown={currentDropdown}
+                                setCurrentDropdown={setCurrentDropdown}
+                                name={'user'}
+                                icon={<AiOutlineUser />}
+                            >
+                                <li className="dropdown-item">
+                                    <span onClick={() => logout()}>Sair</span>
+                                </li>
+                                <li className="dropdown-item">
+                                    <Link className="link" to="#">
+                                        Meus Pedidos
+                                    </Link>
+                                </li>
+                            </DropdownMenu>
+                        </li>
+                        <li>
+                            <DropdownMenu
+                                currentDropdown={currentDropdown}
+                                setCurrentDropdown={setCurrentDropdown}
+                                name={'cart'}
+                                icon={<AiOutlineShopping />}
+                            >
+                                <li className="dropdown-item">
+                                    <Link className="link" to="/cart">
+                                        Meu Carrinho
+                                    </Link>
+                                </li>
+                            </DropdownMenu>
+                        </li>
+                    </ul>
+                </nav>
             ) : (
-                <>
-                    <Link className="link" to="/">
-                        <h1>DrivenBooks</h1>
-                    </Link>
-                    <nav>
-                        <ul>
-                            <li>
-                                <Link className="link" to="/login">
-                                    Login
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className="link" to="/cadastro">
-                                    Cadastre-se
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className="link" to="/carrinho">
-                                    <AiOutlineShoppingCart />
-                                </Link>
-                            </li>
-                        </ul>
-                    </nav>
-                </>
+                <nav>
+                    <ul>
+                        <li>
+                            <DropdownMenu
+                                currentDropdown={currentDropdown}
+                                setCurrentDropdown={setCurrentDropdown}
+                                name={'user'}
+                                icon={<AiOutlineLogin />}
+                            >
+                                <li className="dropdown-item">
+                                    <Link className="link" to="/login">
+                                        Login
+                                    </Link>
+                                </li>
+                                <li className="dropdown-item">
+                                    <Link className="link" to="/cadastro">
+                                        Cadastre-se
+                                    </Link>
+                                </li>
+                            </DropdownMenu>
+                        </li>
+                        <li>
+                            <DropdownMenu
+                                currentDropdown={currentDropdown}
+                                setCurrentDropdown={setCurrentDropdown}
+                                name={'cart'}
+                                icon={<AiOutlineShopping />}
+                            >
+                                <li className="dropdown-item">
+                                    <Link className="link" to="/cart">
+                                        Carrinho
+                                    </Link>
+                                </li>
+                            </DropdownMenu>
+                        </li>
+                    </ul>
+                </nav>
             )}
-            {/* <h1>Driven-books</h1> */}
         </$Header>
     );
 }
 
-function DropdownMenu() {
-    const navigate = useNavigate();
+function DropdownMenu(props) {
+    const { currentDropdown, setCurrentDropdown, name, icon } = props;
 
-    function logout() {
-        // TODO: logout endpoint
-        localStorage.removeItem('secret-key');
-        navigate('/');
-        window.location.reload(false);
-    }
     return (
-        <ul className="dropdown-menu">
-            <li onClick={() => logout()}>Sair</li>
-        </ul>
+        <div
+            className="item"
+            onClick={() =>
+                setCurrentDropdown(currentDropdown === name ? null : name)
+            }
+        >
+            {icon}
+            {currentDropdown === name && (
+                <div
+                    className="dropdown-menu"
+                    onMouseLeave={() => setCurrentDropdown(null)}
+                >
+                    <ul>{props.children}</ul>
+                </div>
+            )}
+        </div>
     );
 }
