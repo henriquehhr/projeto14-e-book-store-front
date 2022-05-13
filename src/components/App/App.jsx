@@ -8,6 +8,7 @@ import HomePage from '../pages/HomePage/HomePage.jsx';
 import BookPage from '../pages/BookPage/BookPage.jsx';
 import Header from '../Header/Header.jsx';
 import '../../assets/reset.css';
+import '../../assets/style.css';
 
 export default function App() {
     const localToken = localStorage.getItem('secret-key');

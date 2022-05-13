@@ -6,51 +6,78 @@ export const $Header = styled.header`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: 0 auto;
     padding: 20px;
 
-    h1 {
-        font-size: 2rem;
+    .title {
+        font-size: 2.5rem;
         font-weight: bold;
+        font-family: 'Saira Stencil One', cursive;
+        color: #ff6f9c;
     }
 
     .link {
+        color: #000;
+        text-decoration: none;
+    }
+
+    .item {
+        position: relative;
         text-decoration: none;
         color: #000;
         cursor: pointer;
-    }
-
-    .greeting {
-        position: relative;
-        margin-right: 20px;
+        height: 50px;
+        width: 50px;
+        padding: 5px;
+        margin: 2px;
         display: flex;
         align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: #ff6f9c;
+
+        &:hover {
+            background: #ffc0cb;
+        }
 
         .dropdown-menu {
-            position: absolute;
-            right: 0;
-            display: flex;
-            flex-direction: column;
-            top: 100%;
-            width: 100%;
-            background-color: #fafafa;
+            z-index: 2;
+            position: fixed;
+            top: 80px;
+            right: 10px;
+            width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            background-color: #ff6f9c;
+            border-radius: 4px;
+            ul {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+
+                .dropdown-item {
+                    width: 100%;
+                    padding: 10px;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 4px;
+                    color: #000;
+                    cursor: pointer;
+                    transition: all 0.2s ease-in-out;
+
+                    &:hover {
+                        background-color: #ffc0cb;
+                    }
+                }
+            }
         }
     }
 
     nav {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-
         ul {
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: space-between;
-            list-style: none;
-            margin: 0;
-            padding: 0;
 
             li {
                 display: flex;
@@ -68,10 +95,20 @@ export const $Header = styled.header`
     @media (max-width: 600px) {
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        height: auto;
 
-        h1 {
-            font-size: 1.5rem;
+        .link {
+            align-self: flex-start;
+        }
+
+        nav {
+            align-self: flex-end;
+        }
+
+        .item {
+            .dropdown-menu {
+                top: 120px;
+            }
         }
     }
 `;

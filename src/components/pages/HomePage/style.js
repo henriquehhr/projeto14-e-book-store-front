@@ -6,8 +6,8 @@ export const $HomePage = styled.div`
     flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    /* margin-top: 50px;
+    margin-bottom: 50px; */
 
     .book-container {
         position: relative;
