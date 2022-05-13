@@ -6,6 +6,7 @@ import SignUpPage from '../pages/SignUpPage/SignUpPage.jsx';
 import SignInPage from '../pages/SignInPage/SigInPage.jsx';
 import HomePage from '../pages/HomePage/HomePage.jsx';
 import BookPage from '../pages/BookPage/BookPage.jsx';
+import CartPage from '../pages/CartPage/CartPage.jsx';
 import Header from '../Header/Header.jsx';
 import '../../assets/reset.css';
 import '../../assets/style.css';
@@ -45,7 +46,7 @@ export default function App() {
                 <Route path="/login" element={<SignInPage />} />
                 <Route path="/cadastro" element={<SignUpPage />} />
                 <Route path="/livro/:idLivro" element={<BookPage />} />
-                <Route path="/carrinho" element={<>Carrinho de compra</>} />
+                <Route path="/carrinho" element={< CartPage/>} />
                 <Route
                     path="/finalizar-compra"
                     element={<>Finalizar compra</>}
