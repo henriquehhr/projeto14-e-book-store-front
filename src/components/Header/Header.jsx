@@ -95,7 +95,7 @@ export default function Header() {
                             >
                                 <li className="dropdown-item">
                                     <Link className="link" to="/cart">
-                                        Meu Carrinho
+                                        Carrinho
                                     </Link>
                                 </li>
                             </DropdownMenu>

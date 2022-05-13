@@ -7,6 +7,8 @@ export const $Header = styled.header`
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    background-color: #ffc0cb;
+    box-shadow: 0px 0px 5px #000000;
 
     .title {
         font-size: 2.5rem;
@@ -36,18 +38,19 @@ export const $Header = styled.header`
         background: #ff6f9c;
 
         &:hover {
-            background: #ffc0cb;
+            background: #ffd0cb;
         }
 
         .dropdown-menu {
             z-index: 2;
             position: fixed;
-            top: 80px;
+            top: 100px;
             right: 10px;
             width: 200px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             background-color: #ff6f9c;
             border-radius: 4px;
+            box-shadow: 0px 0px 5px #000000;
+
             ul {
                 list-style: none;
                 display: flex;
@@ -66,7 +69,7 @@ export const $Header = styled.header`
                     transition: all 0.2s ease-in-out;
 
                     &:hover {
-                        background-color: #ffc0cb;
+                        background-color: #ffd0cb;
                     }
                 }
             }
@@ -107,7 +110,7 @@ export const $Header = styled.header`
 
         .item {
             .dropdown-menu {
-                top: 120px;
+                top: 140px;
             }
         }
     }
