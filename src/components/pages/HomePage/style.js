@@ -23,6 +23,10 @@ export const $HomePage = styled.div`
         align-items: center;
         justify-content: flex-start;
         margin-bottom: 20px;
+        padding-bottom: 5px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        width: 100%;
 
         .kind {
             display: flex;
