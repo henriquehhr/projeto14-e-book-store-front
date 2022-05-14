@@ -1,16 +1,18 @@
 /* eslint-disable react/jsx-pascal-case */
-import { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
-import { BsCartPlus } from 'react-icons/bs';
-import UserContext from "../../../contexts/UserContext.js";
 
 import { $HomePage } from './style.js';
+import Carrousel from '../../Carroussel/Carroussel.jsx';
+import BookCard from '../../BookCard/BookCard.jsx';
 
 export default function HomePage() {
     const [books, setBooks] = useState(null);
-    const navigate = useNavigate();
-    const {authToken} = useContext(UserContext);
+    const [kinds, setKinds] = useState(null);
+    const [currentKind, setCurrentKind] = useState(null);
+    const carrouselRef1 = useRef(null);
+    const carrouselRef2 = useRef(null);
+    const carrouselRef3 = useRef(null);
 
     function getBooks() {
         const url = `http://localhost:5000/books`;
@@ -24,27 +26,23 @@ export default function HomePage() {
             });
     }
 
-    function addToCart(bookId) {
-        console.log(authToken);
-        if(authToken.current) {
-            //TODO somar o carrinho do localStorage com o carrinho do BD
-            const header = {
-                headers: {"Authorization": `Bearer ${authToken.current}`}
-            };
-            const booksId = [bookId];
-            const promisse = axios.post("http://localhost:5000/shopping-carts",{booksId}, header);
-            promisse.then(response => console.log(response.data));
-            return;
-        }
-        const localStorageCartJSON = localStorage.getItem("local storage cart"); 
-        let localStorageCart = localStorageCartJSON ? JSON.parse(localStorageCartJSON) : [];
-        localStorageCart.push(bookId);
-        localStorage.setItem("local storage cart", JSON.stringify(localStorageCart));
+    function getKinds() {
+        const url = `http://localhost:5000/kinds`;
+        const promise = axios.get(url);
+        promise
+            .then((response) => {
+                setKinds(response.data);
+                setCurrentKind(response.data[0]);
+            })
+            .catch(() => {
+                alert('Erro ao buscar os tipos');
+            });
     }
 
     useEffect(
         () => {
             getBooks();
+            getKinds();
         },
         // eslint-disable-next-line
         []
@@ -54,39 +52,45 @@ export default function HomePage() {
         <>
             {books ? (
                 <$HomePage>
-                    {books.map((book) => (
-                        <div
-                            className="book-container"
-                            onClick={() => navigate(`/livro/${book._id}`)}
-                            key={book._id}
-                        >
-                            <img
-                                src={book.cover}
-                                alt={`${book.name} cover`}
-                                style={{ width: '100px' }}
-                            />
+                    <h1 className="label">Promoções</h1>
+                    <Carrousel carrouselRef={carrouselRef1}>
+                        {books
+                            .filter((book) => book.price < book.oldPrice)
+                            .map((book) => (
+                                <BookCard book={book} key={book._id} />
+                            ))}
+                    </Carrousel>
 
-                            <div className="info-container">
-                                <h1>{book.name}</h1>
-                                <p>{book.author}</p>
-                                <br />
-                                <p>
-                                    Preço:{' '}
-                                    {book.price.toLocaleString('pt-br', {
-                                        style: 'currency',
-                                        currency: 'BRL',
-                                    })}
-                                </p>
-                            </div>
-                            <BsCartPlus
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    addToCart(book._id);
-                                }}
-                                className=" add-to-cart"
-                            />
-                        </div>
-                    ))}
+                    <div className="kinds-container">
+                        {kinds?.map((kind) => (
+                            <h1
+                                key={kind._id}
+                                className={`kind ${
+                                    kind._id === currentKind._id
+                                        ? 'current'
+                                        : ''
+                                }`}
+                                onClick={() => setCurrentKind(kind)}
+                            >
+                                {' '}
+                                {kind.name}
+                            </h1>
+                        ))}
+                    </div>
+                    <Carrousel carrouselRef={carrouselRef2}>
+                        {books
+                            .filter((book) => book.kind === currentKind?._id)
+                            .map((book) => (
+                                <BookCard book={book} key={book._id} />
+                            ))}
+                    </Carrousel>
+
+                    <h1 className="label">Todos os Livros</h1>
+                    <Carrousel carrouselRef={carrouselRef3}>
+                        {books.map((book) => (
+                            <BookCard book={book} key={book._id} />
+                        ))}
+                    </Carrousel>
                 </$HomePage>
             ) : (
                 <h1>Carregando...</h1>
