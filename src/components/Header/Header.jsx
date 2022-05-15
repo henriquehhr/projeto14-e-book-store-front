@@ -56,7 +56,7 @@ export default function Header() {
                                 icon={<AiOutlineShopping />}
                             >
                                 <li className="dropdown-item">
-                                    <Link className="link" to="/cart">
+                                    <Link className="link" to="/carrinho">
                                         Meu Carrinho
                                     </Link>
                                 </li>
@@ -94,7 +94,7 @@ export default function Header() {
                                 icon={<AiOutlineShopping />}
                             >
                                 <li className="dropdown-item">
-                                    <Link className="link" to="/cart">
+                                    <Link className="link" to="/carrinho">
                                         Carrinho
                                     </Link>
                                 </li>

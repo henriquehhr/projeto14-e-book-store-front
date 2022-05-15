@@ -10,14 +10,14 @@ export default function BookCard(props) {
     const navigate = useNavigate();
     const { authToken } = useContext(UserContext);
 
-    function addToCart(bookId) {
+    function addToCart(book) {
         console.log(authToken);
         if (authToken.current) {
             //TODO somar o carrinho do localStorage com o carrinho do BD
             const header = {
                 headers: { Authorization: `Bearer ${authToken.current}` },
             };
-            const booksId = [bookId];
+            const booksId = [book._id];
             const promisse = axios.post(
                 'http://localhost:5000/shopping-carts',
                 { booksId },
@@ -30,7 +30,7 @@ export default function BookCard(props) {
         let localStorageCart = localStorageCartJSON
             ? JSON.parse(localStorageCartJSON)
             : [];
-        localStorageCart.push(bookId);
+        localStorageCart.push(book);
         localStorage.setItem(
             'local storage cart',
             JSON.stringify(localStorageCart)
@@ -70,7 +70,7 @@ export default function BookCard(props) {
             <BsCartPlus
                 onClick={(e) => {
                     e.stopPropagation();
-                    addToCart(book._id);
+                    addToCart(book);
                 }}
                 className=" add-to-cart"
             />
