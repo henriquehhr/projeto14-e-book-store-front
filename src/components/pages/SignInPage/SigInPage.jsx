@@ -62,7 +62,7 @@ export default function LoginPage() {
                     };
                     const promisse = axios.post(
                         'http://localhost:5000/shopping-carts',
-                        { booksId: localStorageCart },
+                        { booksId: localStorageCart.map((book) => book._id) },
                         header
                     );
                     promisse.then(() =>

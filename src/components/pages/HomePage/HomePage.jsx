@@ -3,14 +3,14 @@ import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { BsCartPlus } from 'react-icons/bs';
-import UserContext from "../../../contexts/UserContext.js";
+import UserContext from '../../../contexts/UserContext.js';
 
 import { $HomePage } from './style.js';
 
 export default function HomePage() {
     const [books, setBooks] = useState(null);
     const navigate = useNavigate();
-    const {authToken} = useContext(UserContext);
+    const { authToken } = useContext(UserContext);
 
     function getBooks() {
         const url = `http://localhost:5000/books`;
@@ -24,22 +24,31 @@ export default function HomePage() {
             });
     }
 
-    function addToCart(bookId) {
+    function addToCart(book) {
         console.log(authToken);
-        if(authToken.current) {
+        if (authToken.current) {
             //TODO somar o carrinho do localStorage com o carrinho do BD
             const header = {
-                headers: {"Authorization": `Bearer ${authToken.current}`}
+                headers: { Authorization: `Bearer ${authToken.current}` },
             };
-            const booksId = [bookId];
-            const promisse = axios.post("http://localhost:5000/shopping-carts",{booksId}, header);
-            promisse.then(response => console.log(response.data));
+            const booksId = [book._id];
+            const promisse = axios.post(
+                'http://localhost:5000/shopping-carts',
+                { booksId },
+                header
+            );
+            promisse.then((response) => console.log(response.data));
             return;
         }
-        const localStorageCartJSON = localStorage.getItem("local storage cart"); 
-        let localStorageCart = localStorageCartJSON ? JSON.parse(localStorageCartJSON) : [];
-        localStorageCart.push(bookId);
-        localStorage.setItem("local storage cart", JSON.stringify(localStorageCart));
+        const localStorageCartJSON = localStorage.getItem('local storage cart');
+        let localStorageCart = localStorageCartJSON
+            ? JSON.parse(localStorageCartJSON)
+            : [];
+        localStorageCart.push(book);
+        localStorage.setItem(
+            'local storage cart',
+            JSON.stringify(localStorageCart)
+        );
     }
 
     useEffect(
@@ -81,7 +90,7 @@ export default function HomePage() {
                             <BsCartPlus
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    addToCart(book._id);
+                                    addToCart(book);
                                 }}
                                 className=" add-to-cart"
                             />
