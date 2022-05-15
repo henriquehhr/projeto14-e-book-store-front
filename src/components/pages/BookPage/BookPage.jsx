@@ -27,7 +27,6 @@ export default function BookPage() {
     function addToCart(book) {
         console.log(authToken);
         if (authToken.current) {
-            //TODO somar o carrinho do localStorage com o carrinho do BD
             const header = {
                 headers: { Authorization: `Bearer ${authToken.current}` },
             };
@@ -44,11 +43,17 @@ export default function BookPage() {
         let localStorageCart = localStorageCartJSON
             ? JSON.parse(localStorageCartJSON)
             : [];
-        localStorageCart.push(book);
-        localStorage.setItem(
-            'local storage cart',
-            JSON.stringify(localStorageCart)
-        );
+        if (
+            !localStorageCart.find(
+                (localStorageBook) => localStorageBook._id == book._id
+            )
+        ) {
+            localStorageCart.push(book);
+            localStorage.setItem(
+                'local storage cart',
+                JSON.stringify(localStorageCart)
+            );
+        }
     }
 
     useEffect(
