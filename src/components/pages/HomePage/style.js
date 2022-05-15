@@ -51,42 +51,44 @@ export const $HomePage = styled.div`
 
     .container {
         position: relative;
-        max-width: 90vw;
+        max-width: calc(100vw - 40px);
         margin-bottom: 20px;
 
-        .left-arrow {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-            cursor: pointer;
-            z-index: 1;
-            /* width: 30px;
+        .arrows {
+            .left-arrow {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                cursor: pointer;
+                z-index: 1;
+                /* width: 30px;
             height: 30px; */
-            color: #ff6f9c;
-            font-size: 30px;
-            transition: all 0.3s ease-in-out;
+                color: #ff6f9c;
+                font-size: 30px;
+                transition: all 0.3s ease-in-out;
 
-            &:hover {
-                color: #ffd0cb;
+                &:hover {
+                    color: #ffd0cb;
+                }
             }
-        }
 
-        .right-arrow {
-            position: absolute;
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-            cursor: pointer;
-            z-index: 1;
-            /* width: 30px;
+            .right-arrow {
+                position: absolute;
+                top: 50%;
+                right: 0;
+                transform: translateY(-50%);
+                cursor: pointer;
+                z-index: 1;
+                /* width: 30px;
             height: 30px; */
-            color: #ff6f9c;
-            font-size: 30px;
-            transition: all 0.3s ease-in-out;
+                color: #ff6f9c;
+                font-size: 30px;
+                transition: all 0.3s ease-in-out;
 
-            &:hover {
-                color: #ffd0cb;
+                &:hover {
+                    color: #ffd0cb;
+                }
             }
         }
     }
