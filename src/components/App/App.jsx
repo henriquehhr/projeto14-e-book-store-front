@@ -54,6 +54,12 @@ export default function App() {
                 <Route path="/carrinho" element={<CartPage />} />
                 <Route path="/finalizar-compra" element={<CheckOutPage />} />
                 <Route path="/sucesso" element={<Success />} />
+                <Route
+                    path="/meus-pedidos"
+                    element={
+                        <>Em breve você poderá ver seus pedidos por aqui!</>
+                    }
+                />
             </Routes>
         </UserContext.Provider>
     );

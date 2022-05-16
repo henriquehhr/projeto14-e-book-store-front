@@ -71,7 +71,7 @@ export default function Header() {
                                 </li>
                                 <li
                                     className="dropdown-item"
-                                    onClick={() => navigate('/')}
+                                    onClick={() => navigate('/meus-pedidos')}
                                 >
                                     Meus Pedidos
                                 </li>

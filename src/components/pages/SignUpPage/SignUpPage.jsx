@@ -53,7 +53,7 @@ export default function SignUpPage() {
             }
         } else {
             setDisabled(true);
-            const url = 'http://localhost:5000/signup';
+            const url = 'https://driven-books.herokuapp.com/signup';
             const body = {
                 email: singupInfo.email,
                 name: singupInfo.name,

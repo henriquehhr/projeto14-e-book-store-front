@@ -17,7 +17,7 @@ export default function CartPage() {
             headers: { Authorization: `Bearer ${authToken.current}` },
         };
         const promisse = axios.post(
-            'http://localhost:5000/checkout',
+            'https://driven-books.herokuapp.com/checkout',
             { payment: 'teste' },
             header
         );

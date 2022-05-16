@@ -18,7 +18,7 @@ export default function CartPage() {
                 headers: { Authorization: `Bearer ${authToken.current}` },
             };
             const promisse = axios.get(
-                'http://localhost:5000/shopping-carts',
+                'https://driven-books.herokuapp.com/shopping-carts',
                 header
             );
             promisse.then((response) => {
@@ -54,7 +54,7 @@ export default function CartPage() {
                 data: { bookId: bookToRemove._id.toString() },
             };
             const promisse = axios.delete(
-                'http://localhost:5000/shopping-carts',
+                'https://driven-books.herokuapp.com/shopping-carts',
                 config
             );
             promisse.then(() =>
