@@ -38,13 +38,17 @@ export default function Header() {
                                 name={'user'}
                                 icon={<AiOutlineUser />}
                             >
-                                <li className="dropdown-item">
-                                    <span onClick={() => logout()}>Sair</span>
+                                <li
+                                    className="dropdown-item"
+                                    onClick={() => logout()}
+                                >
+                                    <span>Sair</span>
                                 </li>
-                                <li className="dropdown-item">
-                                    <Link className="link" to="#">
-                                        Meus Pedidos
-                                    </Link>
+                                <li
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/')}
+                                >
+                                    Meus Pedidos
                                 </li>
                             </DropdownMenu>
                         </li>
@@ -55,10 +59,18 @@ export default function Header() {
                                 name={'cart'}
                                 icon={<AiOutlineShopping />}
                             >
+<<<<<<< HEAD
                                 <li className="dropdown-item">
                                     <Link className="link" to="/carrinho">
                                         Meu Carrinho
                                     </Link>
+=======
+                                <li
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/carrinho')}
+                                >
+                                    Meu Carrinho
+>>>>>>> ae52e0980b06f242ae73ea6e6f30f5960a5696f4
                                 </li>
                             </DropdownMenu>
                         </li>
@@ -74,15 +86,17 @@ export default function Header() {
                                 name={'user'}
                                 icon={<AiOutlineLogin />}
                             >
-                                <li className="dropdown-item">
-                                    <Link className="link" to="/login">
-                                        Login
-                                    </Link>
+                                <li
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/login')}
+                                >
+                                    Login
                                 </li>
-                                <li className="dropdown-item">
-                                    <Link className="link" to="/cadastro">
-                                        Cadastre-se
-                                    </Link>
+                                <li
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/cadastro')}
+                                >
+                                    Cadastre-se
                                 </li>
                             </DropdownMenu>
                         </li>
@@ -93,10 +107,18 @@ export default function Header() {
                                 name={'cart'}
                                 icon={<AiOutlineShopping />}
                             >
+<<<<<<< HEAD
                                 <li className="dropdown-item">
                                     <Link className="link" to="/carrinho">
                                         Carrinho
                                     </Link>
+=======
+                                <li
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/carrinho')}
+                                >
+                                    Carrinho
+>>>>>>> ae52e0980b06f242ae73ea6e6f30f5960a5696f4
                                 </li>
                             </DropdownMenu>
                         </li>

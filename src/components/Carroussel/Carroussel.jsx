@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 
 import useWindowWidth from '../../hooks/useWindowWidth.js';
 
+import { $Carroussel } from './style.js';
+
 export default function Carrousel(props) {
     const { carrouselRef } = props;
     const [carrouselWidth, setCarrouselWidth] = useState(
@@ -18,16 +20,12 @@ export default function Carrousel(props) {
         ref.current.scrollLeft += 210;
     }
 
-    // useEffect(() => {
-    //     setCarrouselWidth(carrouselRef.current.scrollWidth);
-    // }, []);
-
     useEffect(() => {
         setCarrouselWidth(carrouselRef.current.scrollWidth);
     }, [windowWidth]);
 
     return (
-        <div className="container">
+        <$Carroussel>
             <div className="carrousel" ref={carrouselRef}>
                 {props.children}
             </div>
@@ -35,7 +33,7 @@ export default function Carrousel(props) {
             {carrouselWidth + 35 > windowWidth ? (
                 <div className="arrows">
                     <AiFillLeftCircle
-                        className="left-arrow"
+                        className="arrow left"
                         onClick={(e) => {
                             e.stopPropagation();
                             handleLeftClick(carrouselRef);
@@ -43,7 +41,7 @@ export default function Carrousel(props) {
                         }}
                     />
                     <AiFillRightCircle
-                        className="right-arrow"
+                        className="arrow right"
                         onClick={(e) => {
                             e.stopPropagation();
                             handleRightClick(carrouselRef);
@@ -52,7 +50,6 @@ export default function Carrousel(props) {
                     />
                 </div>
             ) : null}
-            <h1>{windowWidth}</h1>
-        </div>
+        </$Carroussel>
     );
 }
