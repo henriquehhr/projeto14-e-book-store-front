@@ -1,12 +1,12 @@
 import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 import useWindowWidth from '../../hooks/useWindowWidth.js';
 
 import { $Carroussel } from './style.js';
 
 export default function Carrousel(props) {
-    const { carrouselRef } = props;
+    const carrouselRef = useRef(null);
     const [carrouselWidth, setCarrouselWidth] = useState(
         carrouselRef.current?.scrollWidth
     );
@@ -21,6 +21,7 @@ export default function Carrousel(props) {
     }
 
     useEffect(() => {
+        console.log(carrouselRef.current, carrouselRef.current.scrollWidth);
         setCarrouselWidth(carrouselRef.current.scrollWidth);
     }, [windowWidth]);
 
@@ -37,7 +38,6 @@ export default function Carrousel(props) {
                         onClick={(e) => {
                             e.stopPropagation();
                             handleLeftClick(carrouselRef);
-                            console.log('left');
                         }}
                     />
                     <AiFillRightCircle
@@ -45,7 +45,6 @@ export default function Carrousel(props) {
                         onClick={(e) => {
                             e.stopPropagation();
                             handleRightClick(carrouselRef);
-                            console.log('right');
                         }}
                     />
                 </div>
