@@ -81,20 +81,22 @@ export const $BookPage = styled.div`
     }
 
     @media (max-width: 600px) {
-        flex-direction: column-reverse;
-        align-items: center;
-        justify-content: center;
+        .book {
+            flex-direction: column-reverse;
+            align-items: center;
+            justify-content: center;
 
-        img {
-            width: 100%;
-            margin-bottom: 20px;
-        }
+            img {
+                width: 100%;
+                margin-bottom: 20px;
+            }
 
-        .info-container {
-            width: 100%;
+            .info-container {
+                width: 100%;
 
-            .old-price {
-                display: block;
+                .old-price {
+                    display: block;
+                }
             }
         }
     }
