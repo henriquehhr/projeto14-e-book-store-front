@@ -12,12 +12,12 @@ export const $Carroussel = styled.div`
             transform: translateY(-50%);
             cursor: pointer;
             z-index: 1;
-            color: #ff6f9c;
+            color: #ff4791;
             font-size: 30px;
             transition: all 0.3s ease-in-out;
 
             &:hover {
-                color: #ffd0cb;
+                color: #ff85b6;
             }
 
             &.left {

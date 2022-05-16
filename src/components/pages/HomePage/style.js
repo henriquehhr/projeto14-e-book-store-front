@@ -13,7 +13,7 @@ export const $HomePage = styled.div`
         font-size: 1.5rem;
         font-weight: bold;
         font-family: 'Saira Stencil One', cursive;
-        color: #ff6f9c;
+        color: #ff4791;
         margin-bottom: 20px;
     }
 
@@ -35,7 +35,7 @@ export const $HomePage = styled.div`
             justify-content: center;
             margin-right: 10px;
             padding: 10px;
-            background-color: #ff6f9c;
+            background-color: #ff4791;
             color: #fff;
             border-radius: 5px;
             font-size: 1.5rem;
@@ -44,7 +44,7 @@ export const $HomePage = styled.div`
             cursor: pointer;
 
             &.current {
-                background-color: #ffc0cb;
+                background-color: #ffc2da;
             }
         }
     }
