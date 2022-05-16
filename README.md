@@ -14,7 +14,7 @@
 </p>
 
 <!-- <br/>
-<img src="./public/img/drivenBooks.jpg" alt="Banner" >
+<img src="" alt="Banner" >
 <br/><br/> -->
 
 <details>
@@ -32,8 +32,6 @@
 <br/>
 
 ## Built With
-
-Web application to financial control.
 
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
