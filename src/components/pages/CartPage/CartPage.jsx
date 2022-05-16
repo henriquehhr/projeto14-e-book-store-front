@@ -139,17 +139,21 @@ export default function CartPage() {
                             </div>
                         ))}
                     </ul>
-                    <p className="price">Total: R$ {totalPrice.toFixed(2)}</p>
-                    {authToken.current ? (
-                        <>
-                            <button onClick={checkout}>Comprar</button>
-                        </>
-                    ) : (
-                        <>
-                            <button onClick={signIn}>Faça login</button>
-                            <button onClick={signUp}>Castre-se</button>
-                        </>
-                    )}
+                    <div className="checkout">
+                        <p className="price">
+                            Total: R$ {totalPrice.toFixed(2)}
+                        </p>
+                        {authToken.current ? (
+                            <>
+                                <button onClick={checkout}>Comprar</button>
+                            </>
+                        ) : (
+                            <div className="signInUp">
+                                <button onClick={signIn}>Faça login</button>
+                                <button onClick={signUp}>Castre-se</button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             ) : (
                 <>Os livros escolhidos para compra ficarão aqui!</>

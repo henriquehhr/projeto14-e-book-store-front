@@ -79,12 +79,12 @@ export const $CartPage = styled.main`
                 color: red;
             }
         }
+    }
 
-        /*&:hover {
-            -moz-transform: scale(1.05);
-            -webkit-transform: scale(1.05);
-            transform: scale(1.05);
-        }*/
+    .checkout {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .price {
@@ -100,5 +100,11 @@ export const $CartPage = styled.main`
         background-color: #ffc0cb;
         font-size: 20px;
         font-weight: 600;
+    }
+
+    .signInUp {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
     }
 `;
