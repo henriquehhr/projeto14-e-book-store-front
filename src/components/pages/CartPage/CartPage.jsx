@@ -128,8 +128,14 @@ export default function CartPage() {
                             </div>
                         ))}
                     </ul>
-                    <button onClick={signIn}>Faça login</button>
-                    <button onClick={signUp}>Castre-se</button>
+                    {authToken.current ? (
+                        <button>Comprar!</button>
+                    ) : (
+                        <>
+                            <button onClick={signIn}>Faça login</button>
+                            <button onClick={signUp}>Castre-se</button>
+                        </>
+                    )}
                 </div>
             ) : (
                 <>Os livros escolhidos para compra ficarão aqui!</>
