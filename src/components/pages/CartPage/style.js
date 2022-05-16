@@ -6,16 +6,15 @@ export const $CartPage = styled($Main)`
     ul {
         display: flex;
         gap: 10px;
-        flex-wrap: wrap;
+        flex-direction: column;
     }
 
     .book-container {
         position: relative;
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 200px;
+        max-width: 500px;
         /* height: 300px; */
         border: 1px solid #ccc;
         border-radius: 5px;
@@ -24,6 +23,7 @@ export const $CartPage = styled($Main)`
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
         .info-container {
+            font-family: 'Roboto', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
