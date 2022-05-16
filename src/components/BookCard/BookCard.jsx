@@ -47,6 +47,8 @@ export default function BookCard(props) {
                 'local storage cart',
                 JSON.stringify(localStorageCart)
             );
+        } else {
+            alert('Esse livro já está no seu carrinho!');
         }
     }
 

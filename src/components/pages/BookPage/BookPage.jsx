@@ -26,6 +26,7 @@ export default function BookPage() {
             const header = {
                 headers: { Authorization: `Bearer ${authToken.current}` },
             };
+            console.log('enviando com header');
             promise = axios.get(url, header);
         } else {
             promise = axios.get(url);
@@ -42,7 +43,8 @@ export default function BookPage() {
                 setBook(response.data);
                 console.log(response.status);
                 if (response.status == 207) setDisabled(true);
-                else if (response.status == 202) setBookAlreadyInCart(true);
+                else if (response.data.alreadyInCart)
+                    setBookAlreadyInCart(true);
             })
             .catch(() => {
                 alert('Erro ao buscar o livro');
@@ -171,8 +173,9 @@ export default function BookPage() {
                                         : 'small add-to-cart'
                                 }
                             >
-                                {disabled ? 'Você já tem esse livro' : ''}
-                                {bookAlreadyInCart
+                                {disabled
+                                    ? 'Você já tem esse livro'
+                                    : bookAlreadyInCart
                                     ? 'Remover do carrinho'
                                     : 'Adicionar ao Carrinho'}
                             </$Button>
