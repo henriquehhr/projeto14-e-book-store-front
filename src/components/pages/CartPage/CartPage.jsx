@@ -95,6 +95,7 @@ export default function CartPage() {
             {books.length != 0 ? (
                 <div>
                     <ul>
+                        <h1 className="label">Carrinho de compras</h1>
                         {books.map((book) => (
                             <div
                                 className="book-container"
@@ -113,6 +114,16 @@ export default function CartPage() {
                                     <br />
                                     <p>
                                         Preço:{' '}
+                                        <span className="old-price">
+                                            {book.oldPrice > book.price &&
+                                                book.oldPrice.toLocaleString(
+                                                    'pt-br',
+                                                    {
+                                                        style: 'currency',
+                                                        currency: 'BRL',
+                                                    }
+                                                )}
+                                        </span>{' '}
                                         {book.price.toLocaleString('pt-br', {
                                             style: 'currency',
                                             currency: 'BRL',
@@ -120,7 +131,7 @@ export default function CartPage() {
                                     </p>
                                 </div>
                                 <BsTrash
-                                    className=" add-to-cart"
+                                    className="remove"
                                     onClick={() => {
                                         removeBookFromCart(book);
                                     }}
@@ -128,10 +139,10 @@ export default function CartPage() {
                             </div>
                         ))}
                     </ul>
-                    <p>R$ {totalPrice.toFixed(2)}</p>
+                    <p className="price">Total: R$ {totalPrice.toFixed(2)}</p>
                     {authToken.current ? (
                         <>
-                            <button onClick={checkout}>Comprar!</button>
+                            <button onClick={checkout}>Comprar</button>
                         </>
                     ) : (
                         <>
