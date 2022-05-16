@@ -13,11 +13,13 @@ import '../../assets/style.css';
 
 export default function App() {
     const localToken = localStorage.getItem('secret-key');
+    const localUserName = localStorage.getItem('username');
     const authToken = useRef(localToken ? JSON.parse(localToken) : null);
+    const userName = useRef(localUserName ? JSON.parse(localUserName) : null);
 
     const navigate = useNavigate();
     const location = useLocation();
-    const contextValue = { authToken };
+    const contextValue = { authToken, userName };
 
     useEffect(() => {
         //TODO checar se o authToken é válido
@@ -46,7 +48,7 @@ export default function App() {
                 <Route path="/login" element={<SignInPage />} />
                 <Route path="/cadastro" element={<SignUpPage />} />
                 <Route path="/livro/:idLivro" element={<BookPage />} />
-                <Route path="/carrinho" element={< CartPage/>} />
+                <Route path="/carrinho" element={<CartPage />} />
                 <Route
                     path="/finalizar-compra"
                     element={<>Finalizar compra</>}

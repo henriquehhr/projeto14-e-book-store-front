@@ -10,7 +10,7 @@ import UserContext from '../../contexts/UserContext.js';
 import { $Header } from './style.js';
 
 export default function Header() {
-    const { authToken } = useContext(UserContext);
+    const { authToken, userName } = useContext(UserContext);
     const [currentDropdown, setCurrentDropdown] = useState(null);
     const navigate = useNavigate();
 
@@ -29,7 +29,9 @@ export default function Header() {
                 <nav>
                     <ul>
                         <li>
-                            <span className="greeting">Olá, Fulano</span>
+                            <span className="greeting">
+                                Olá, {userName.current}
+                            </span>
                         </li>
                         <li>
                             <DropdownMenu

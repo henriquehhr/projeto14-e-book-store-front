@@ -18,7 +18,7 @@ export default function LoginPage() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
-    const { authToken } = useContext(UserContext);
+    const { authToken, userName } = useContext(UserContext);
 
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
@@ -44,9 +44,14 @@ export default function LoginPage() {
                 console.log(response.data);
                 localStorage.setItem(
                     'secret-key',
-                    JSON.stringify(response.data)
+                    JSON.stringify(response.data.token)
                 );
-                authToken.current = response.data;
+                localStorage.setItem(
+                    'username',
+                    JSON.stringify(response.data.username)
+                );
+                authToken.current = response.data.token;
+                userName.current = response.data.username;
                 const localStorageCartJSON =
                     localStorage.getItem('local storage cart');
                 let localStorageCart = localStorageCartJSON
