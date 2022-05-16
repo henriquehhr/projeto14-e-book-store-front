@@ -92,7 +92,7 @@ export default function HomePage() {
                     </h1>
                 ))}
             </div>
-            <Carrousel>
+            <Carrousel currentKind={currentKind}>
                 {books
                     .filter((book) => book.kind === currentKind?._id)
                     .map((book) => (
