@@ -70,43 +70,66 @@ export default function CartPage() {
         }
     }
 
+    function checkout() {
+        const header = {
+            headers: { Authorization: `Bearer ${authToken.current}` },
+        };
+        const promisse = axios.post(
+            'http://localhost:5000/shopping-carts',
+            { payment: 'teste' },
+            header
+        );
+        promisse.then(() => console.log('compra efetuada'));
+    }
+
+    function signIn() {
+        navigate('/login', { state: { chekout: true } });
+    }
+
+    function signUp() {
+        navigate('/cadastro', { state: { chekout: true } });
+    }
+
     return (
         <$CartPage>
             {books.length != 0 ? (
-                <ul>
-                    {books.map((book) => (
-                        <div
-                            className="book-container"
-                            /*onClick={() => navigate(`/livro/${book._id}`)}*/
-                            key={book._id}
-                        >
-                            <img
-                                src={book.cover}
-                                alt={`${book.name} cover`}
-                                style={{ width: '100px' }}
-                            />
+                <div>
+                    <ul>
+                        {books.map((book) => (
+                            <div
+                                className="book-container"
+                                /*onClick={() => navigate(`/livro/${book._id}`)}*/
+                                key={book._id}
+                            >
+                                <img
+                                    src={book.cover}
+                                    alt={`${book.name} cover`}
+                                    style={{ width: '100px' }}
+                                />
 
-                            <div className="info-container">
-                                <h1>{book.name}</h1>
-                                <p>{book.author}</p>
-                                <br />
-                                <p>
-                                    Preço:{' '}
-                                    {book.price.toLocaleString('pt-br', {
-                                        style: 'currency',
-                                        currency: 'BRL',
-                                    })}
-                                </p>
+                                <div className="info-container">
+                                    <h1>{book.name}</h1>
+                                    <p>{book.author}</p>
+                                    <br />
+                                    <p>
+                                        Preço:{' '}
+                                        {book.price.toLocaleString('pt-br', {
+                                            style: 'currency',
+                                            currency: 'BRL',
+                                        })}
+                                    </p>
+                                </div>
+                                <BsTrash
+                                    className=" add-to-cart"
+                                    onClick={() => {
+                                        removeBookFromCart(book);
+                                    }}
+                                />
                             </div>
-                            <BsTrash
-                                className=" add-to-cart"
-                                onClick={() => {
-                                    removeBookFromCart(book);
-                                }}
-                            />
-                        </div>
-                    ))}
-                </ul>
+                        ))}
+                    </ul>
+                    <button onClick={signIn}>Comprar</button>
+                </div>
             ) : (
                 <>Os livros escolhidos para compra ficarão aqui!</>
             )}
