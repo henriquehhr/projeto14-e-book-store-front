@@ -13,6 +13,7 @@ export default function BookPage() {
     const { idLivro } = useParams();
     const [book, setBook] = useState(null);
     const [disabled, setDisabled] = useState(false);
+    const [bookAlreadyInCart, setBookAlreadyInCart] = useState(false);
     const { authToken } = useContext(UserContext);
 
     const [collapsedDescription, setCollasedDescription] = useState(true);
@@ -27,11 +28,20 @@ export default function BookPage() {
             promise = axios.get(url, header);
         } else {
             promise = axios.get(url);
+            let localStorageCartJSON =
+                localStorage.getItem('local storage cart');
+            let localStorageCart = localStorageCartJSON
+                ? JSON.parse(localStorageCartJSON)
+                : [];
+            if (localStorageCart.find((book) => book._id == idLivro))
+                setBookAlreadyInCart(true);
         }
         promise
             .then((response) => {
                 setBook(response.data);
+                console.log(response.status);
                 if (response.status == 207) setDisabled(true);
+                else if (response.status == 202) setBookAlreadyInCart(true);
             })
             .catch(() => {
                 alert('Erro ao buscar o livro');
@@ -39,7 +49,8 @@ export default function BookPage() {
     }
 
     function addToCart(book) {
-        console.log(authToken);
+        if (bookAlreadyInCart) return removeBookFromCart(book);
+        setBookAlreadyInCart(true);
         if (authToken.current) {
             const header = {
                 headers: { Authorization: `Bearer ${authToken.current}` },
@@ -67,6 +78,30 @@ export default function BookPage() {
                 'local storage cart',
                 JSON.stringify(localStorageCart)
             );
+        }
+    }
+
+    function removeBookFromCart(bookToRemove) {
+        setBookAlreadyInCart(false);
+        if (authToken.current) {
+            const config = {
+                headers: { Authorization: `Bearer ${authToken.current}` },
+                data: { bookId: bookToRemove._id.toString() },
+            };
+            const promisse = axios.delete(
+                'http://localhost:5000/shopping-carts',
+                config
+            );
+        } else {
+            let localStorageCartJSON =
+                localStorage.getItem('local storage cart');
+            let localStorageCart = localStorageCartJSON
+                ? JSON.parse(localStorageCartJSON)
+                : [];
+            localStorageCartJSON = JSON.stringify(
+                localStorageCart.filter((book) => book._id != bookToRemove._id)
+            );
+            localStorage.setItem('local storage cart', localStorageCartJSON);
         }
     }
 
@@ -121,10 +156,15 @@ export default function BookPage() {
                         <$Button
                             disabled={disabled}
                             onClick={() => addToCart(book)}
-                            className="small add-to-cart"
+                            className={
+                                bookAlreadyInCart
+                                    ? 'already-in-cart small add-to-cart'
+                                    : 'small add-to-cart'
+                            }
                         >
-                            {disabled
-                                ? 'Você já tem esse livro'
+                            {disabled ? 'Você já tem esse livro' : ''}
+                            {bookAlreadyInCart
+                                ? 'Remover do carrinho'
                                 : 'Adicionar ao Carrinho'}
                         </$Button>
                     </div>
