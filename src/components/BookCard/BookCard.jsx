@@ -23,7 +23,14 @@ export default function BookCard(props) {
                 { booksId },
                 header
             );
-            promisse.then((response) => console.log(response.data));
+            //promisse.then((response) => console.log(response.data));
+            promisse.then((response) => {
+                if (response.status == 204) {
+                    alert('Você já comprou esse livro!');
+                } else if (response.status == 206) {
+                    alert('Esse livro já está no seu carrinho');
+                }
+            });
             return;
         }
         const localStorageCartJSON = localStorage.getItem('local storage cart');
