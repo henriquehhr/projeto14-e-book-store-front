@@ -12,7 +12,7 @@ export default function CartPage() {
             <div>
                 <ul>
                     <h1 className="label">Compra finalizada com sucesso! </h1>
-                    <h2>resumo da compra:</h2>
+                    <h2>Resumo da compra:</h2>
                     {books.map((book) => (
                         <div className="book-container" key={book._id}>
                             <div className="info-container">
