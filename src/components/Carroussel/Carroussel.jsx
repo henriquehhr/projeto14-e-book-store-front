@@ -21,7 +21,6 @@ export default function Carrousel(props) {
     }
 
     useEffect(() => {
-        console.log(carrouselRef.current, carrouselRef.current.scrollWidth);
         setCarrouselWidth(carrouselRef.current.scrollWidth);
     }, [windowWidth]);
 
