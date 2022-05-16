@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const $Header = styled.header`
+    font-family: 'Roboto', sans-serif;
     z-index: 1;
     display: flex;
     flex-direction: row;
@@ -26,11 +27,15 @@ export const $Header = styled.header`
         position: relative;
         .cart-quantity {
             position: absolute;
-            bottom: 2px;
-            right: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            bottom: 0;
+            right: 0;
             font-size: 12px;
             border-radius: 50%;
-            padding: 6px;
+            width: 20px;
+            height: 20px;
             background-color: #ff85b6;
             color: black;
         }
