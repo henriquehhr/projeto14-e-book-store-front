@@ -32,8 +32,9 @@ export const $CartPage = styled.main`
         display: flex;
         align-items: center;
         justify-content: center;
-        //max-width: 500px;
-        width: 375px;
+        max-width: 500px;
+        /* width: 375px; */
+        width: calc(100vw - 40px);
         border: 1px solid #ccc;
         border-radius: 5px;
         padding: 10px;
@@ -106,5 +107,15 @@ export const $CartPage = styled.main`
         display: flex;
         flex-direction: column;
         gap: 5px;
+    }
+
+    .link {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #ff6f9c;
+        text-decoration: none;
+        cursor: pointer;
+        margin-top: 20px;
+        align-self: center;
     }
 `;
