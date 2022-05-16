@@ -59,18 +59,11 @@ export default function Header() {
                                 name={'cart'}
                                 icon={<AiOutlineShopping />}
                             >
-<<<<<<< HEAD
-                                <li className="dropdown-item">
-                                    <Link className="link" to="/carrinho">
-                                        Meu Carrinho
-                                    </Link>
-=======
                                 <li
                                     className="dropdown-item"
                                     onClick={() => navigate('/carrinho')}
                                 >
                                     Meu Carrinho
->>>>>>> ae52e0980b06f242ae73ea6e6f30f5960a5696f4
                                 </li>
                             </DropdownMenu>
                         </li>
@@ -107,18 +100,11 @@ export default function Header() {
                                 name={'cart'}
                                 icon={<AiOutlineShopping />}
                             >
-<<<<<<< HEAD
-                                <li className="dropdown-item">
-                                    <Link className="link" to="/carrinho">
-                                        Carrinho
-                                    </Link>
-=======
                                 <li
                                     className="dropdown-item"
                                     onClick={() => navigate('/carrinho')}
                                 >
                                     Carrinho
->>>>>>> ae52e0980b06f242ae73ea6e6f30f5960a5696f4
                                 </li>
                             </DropdownMenu>
                         </li>
