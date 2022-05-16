@@ -2,6 +2,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { AiOutlineUp, AiOutlineDown } from 'react-icons/ai';
 
 import UserContext from '../../../contexts/UserContext.js';
 import { $Button } from '../../../globalStyles/globalStyles.js';
@@ -13,6 +14,8 @@ export default function BookPage() {
     const [book, setBook] = useState(null);
     const [disabled, setDisabled] = useState(false);
     const { authToken } = useContext(UserContext);
+
+    const [collapsedDescription, setCollasedDescription] = useState(true);
 
     function getBook() {
         const url = `http://localhost:5000/books/${idLivro}`;
@@ -83,15 +86,45 @@ export default function BookPage() {
                     <div className="info-container">
                         <h1>{book.name}</h1>
                         <p>{book.author}</p>
-                        <p>{book.description}</p>
+                        <p
+                            className={
+                                collapsedDescription
+                                    ? 'description collapsed-description'
+                                    : 'description '
+                            }
+                        >
+                            {book.description}
+                        </p>
+                        <p
+                            className="reed-more"
+                            onClick={() =>
+                                setCollasedDescription(!collapsedDescription)
+                            }
+                        >
+                            {collapsedDescription ? 'Ler mais' : 'Ler menos'}
+                        </p>
+
                         <p>Nº Paginas: {book.pages}</p>
+                        <p>
+                            <span className="old-price">
+                                {book.oldPrice > book.price &&
+                                    book.oldPrice.toLocaleString('pt-br', {
+                                        style: 'currency',
+                                        currency: 'BRL',
+                                    })}
+                            </span>{' '}
+                            {book.price.toLocaleString('pt-br', {
+                                style: 'currency',
+                                currency: 'BRL',
+                            })}
+                        </p>
                         <$Button
                             disabled={disabled}
                             onClick={() => addToCart(book)}
                             className="small add-to-cart"
                         >
                             {disabled
-                                ? 'Você já comprou esse livro'
+                                ? 'Você já tem esse livro'
                                 : 'Adicionar ao Carrinho'}
                         </$Button>
                     </div>

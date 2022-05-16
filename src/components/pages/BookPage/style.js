@@ -14,6 +14,7 @@ export const $BookPage = styled.div`
     }
 
     .info-container {
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -29,10 +30,36 @@ export const $BookPage = styled.div`
             font-size: 1.2rem;
             margin-bottom: 20px;
             text-align: justify;
+
+            &.description {
+                margin-bottom: 5px;
+
+                &.collapsed-description {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 4;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+
+            &.reed-more {
+                color: #00bcd4;
+                align-self: flex-end;
+                cursor: pointer;
+            }
         }
 
         .add-to-cart {
-            align-self: flex-end;
+            position: absolute;
+            bottom: 20px;
+            right: 0px;
+        }
+
+        .old-price {
+            font-size: 1rem;
+            text-decoration: line-through;
+            color: red;
         }
     }
 
@@ -54,6 +81,10 @@ export const $BookPage = styled.div`
 
         .info-container {
             width: 100%;
+
+            .old-price {
+                display: block;
+            }
         }
     }
 `;
