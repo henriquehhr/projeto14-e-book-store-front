@@ -38,13 +38,17 @@ export default function Header() {
                                 name={'user'}
                                 icon={<AiOutlineUser />}
                             >
-                                <li className="dropdown-item">
-                                    <span onClick={() => logout()}>Sair</span>
+                                <li
+                                    className="dropdown-item"
+                                    onClick={() => logout()}
+                                >
+                                    <span>Sair</span>
                                 </li>
-                                <li className="dropdown-item">
-                                    <Link className="link" to="#">
-                                        Meus Pedidos
-                                    </Link>
+                                <li
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/')}
+                                >
+                                    Meus Pedidos
                                 </li>
                             </DropdownMenu>
                         </li>
@@ -55,10 +59,11 @@ export default function Header() {
                                 name={'cart'}
                                 icon={<AiOutlineShopping />}
                             >
-                                <li className="dropdown-item">
-                                    <Link className="link" to="/cart">
-                                        Meu Carrinho
-                                    </Link>
+                                <li
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/carrinho')}
+                                >
+                                    Meu Carrinho
                                 </li>
                             </DropdownMenu>
                         </li>
@@ -74,15 +79,17 @@ export default function Header() {
                                 name={'user'}
                                 icon={<AiOutlineLogin />}
                             >
-                                <li className="dropdown-item">
-                                    <Link className="link" to="/login">
-                                        Login
-                                    </Link>
+                                <li
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/login')}
+                                >
+                                    Login
                                 </li>
-                                <li className="dropdown-item">
-                                    <Link className="link" to="/cadastro">
-                                        Cadastre-se
-                                    </Link>
+                                <li
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/cadastro')}
+                                >
+                                    Cadastre-se
                                 </li>
                             </DropdownMenu>
                         </li>
@@ -93,10 +100,11 @@ export default function Header() {
                                 name={'cart'}
                                 icon={<AiOutlineShopping />}
                             >
-                                <li className="dropdown-item">
-                                    <Link className="link" to="/cart">
-                                        Carrinho
-                                    </Link>
+                                <li
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/carrinho')}
+                                >
+                                    Carrinho
                                 </li>
                             </DropdownMenu>
                         </li>

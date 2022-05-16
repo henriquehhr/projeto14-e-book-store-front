@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BsCartPlus } from 'react-icons/bs';
 
 import UserContext from '../../contexts/UserContext.js';
+import { $BookCard } from './style.js';
 
 export default function BookCard(props) {
     const { book } = props;
@@ -13,7 +14,6 @@ export default function BookCard(props) {
     function addToCart(bookId) {
         console.log(authToken);
         if (authToken.current) {
-            //TODO somar o carrinho do localStorage com o carrinho do BD
             const header = {
                 headers: { Authorization: `Bearer ${authToken.current}` },
             };
@@ -38,11 +38,7 @@ export default function BookCard(props) {
     }
 
     return (
-        <div
-            className="book-container"
-            onClick={() => navigate(`/livro/${book._id}`)}
-            key={book._id}
-        >
+        <$BookCard onClick={() => navigate(`/livro/${book._id}`)}>
             <img
                 src={book.cover}
                 alt={`${book.name} cover`}
@@ -74,6 +70,6 @@ export default function BookCard(props) {
                 }}
                 className=" add-to-cart"
             />
-        </div>
+        </$BookCard>
     );
 }
