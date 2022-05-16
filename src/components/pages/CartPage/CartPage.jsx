@@ -128,8 +128,11 @@ export default function CartPage() {
                             </div>
                         ))}
                     </ul>
+                    <p>R$ {totalPrice.toFixed(2)}</p>
                     {authToken.current ? (
-                        <button onClick={checkout}>Comprar!</button>
+                        <>
+                            <button onClick={checkout}>Comprar!</button>
+                        </>
                     ) : (
                         <>
                             <button onClick={signIn}>Faça login</button>
