@@ -27,7 +27,7 @@ export default function Header() {
                 headers: { Authorization: `Bearer ${authToken.current}` },
             };
             const promisse = axios.get(
-                'http://localhost:5000/shopping-carts',
+                'https://driven-books.herokuapp.com/shopping-carts',
                 header
             );
             promisse.then((response) => {
