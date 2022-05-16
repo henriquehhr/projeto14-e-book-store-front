@@ -53,7 +53,15 @@ export default function Header() {
                     <ul>
                         <li>
                             <span className="greeting">
-                                Olá, {userName.current}
+                                Olá,{' '}
+                                {userName.current
+                                    .split(' ')
+                                    .map(
+                                        (elem) =>
+                                            elem[0].toUpperCase() +
+                                            elem.slice(1)
+                                    )
+                                    .join(' ')}
                             </span>
                         </li>
                         <li>
@@ -136,7 +144,9 @@ export default function Header() {
                                 </li>
                             </DropdownMenu>
                             {cart.length > 0 && (
-                                <p className="cart-quantity">{cart.length}</p>
+                                <div className="cart-quantity">
+                                    <p>{cart.length}</p>
+                                </div>
                             )}
                         </li>
                     </ul>
