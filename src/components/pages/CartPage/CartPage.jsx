@@ -70,16 +70,8 @@ export default function CartPage() {
         }
     }
 
-    function checkout() {
-        const header = {
-            headers: { Authorization: `Bearer ${authToken.current}` },
-        };
-        const promisse = axios.post(
-            'http://localhost:5000/checkout',
-            { payment: 'teste' },
-            header
-        );
-        promisse.then(() => console.log('compra efetuada'));
+    function confirmation() {
+        navigate('/finalizar-compra', { state: { books, totalPrice } });
     }
 
     function signIn() {
@@ -99,7 +91,7 @@ export default function CartPage() {
                         {books.map((book) => (
                             <div
                                 className="book-container"
-                                /*onClick={() => navigate(`/livro/${book._id}`)}*/
+                                onClick={() => navigate(`/livro/${book._id}`)}
                                 key={book._id}
                             >
                                 <img
@@ -113,7 +105,6 @@ export default function CartPage() {
                                     <p>{book.author}</p>
                                     <br />
                                     <p>
-                                        Preço:{' '}
                                         <span className="old-price">
                                             {book.oldPrice > book.price &&
                                                 book.oldPrice.toLocaleString(
@@ -132,7 +123,8 @@ export default function CartPage() {
                                 </div>
                                 <BsTrash
                                     className="remove"
-                                    onClick={() => {
+                                    onClick={(e) => {
+                                        e.stopPropagation();
                                         removeBookFromCart(book);
                                     }}
                                 />
@@ -145,15 +137,18 @@ export default function CartPage() {
                         </p>
                         {authToken.current ? (
                             <>
-                                <button onClick={checkout}>Comprar</button>
+                                <button onClick={confirmation}>Checkout</button>
                             </>
                         ) : (
                             <div className="signInUp">
                                 <button onClick={signIn}>Faça login</button>
-                                <button onClick={signUp}>Castre-se</button>
+                                <button onClick={signUp}>Cadastre-se</button>
                             </div>
                         )}
                     </div>
+                    <p className="link" onClick={() => navigate('/')}>
+                        Continuar comprando...
+                    </p>
                 </div>
             ) : (
                 <>Os livros escolhidos para compra ficarão aqui!</>

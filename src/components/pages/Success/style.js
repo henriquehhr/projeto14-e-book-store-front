@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const $CartPage = styled.main`
+export const $Success = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,6 +86,7 @@ export const $CartPage = styled.main`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 20px;
     }
 
     .price {
@@ -117,5 +118,13 @@ export const $CartPage = styled.main`
         cursor: pointer;
         margin-top: 20px;
         align-self: center;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #000;
+        cursor: pointer;
+        align-self: flex-start;
     }
 `;
