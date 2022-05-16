@@ -2,14 +2,20 @@ import styled from 'styled-components';
 
 export const $Button = styled.button`
     border: none;
-    background: #52b6ff;
+    background: #ff4791;
     color: #ffffff;
     border-radius: 5px;
     text-align: center;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        opacity: 0.9;
+    }
 
     &.inverted-color {
         background: #ffffff;
-        color: #52b6ff;
+        color: #ff4791;
     }
 
     :disabled {
@@ -49,7 +55,7 @@ export const $Input = styled.input`
     border-radius: 5px;
     font-size: 20px;
     line-height: 25px;
-    color: #666666;
+    color: #000000;
     height: 45px;
     padding-left: 10px;
     outline: none;
@@ -57,6 +63,7 @@ export const $Input = styled.input`
 
     &.error {
         border: 1px solid #ff0000;
+        color: #000000;
     }
 
     :disabled {
@@ -65,7 +72,7 @@ export const $Input = styled.input`
     }
 
     ::placeholder {
-        color: #dbdbdb;
+        color: #666666;
     }
 `;
 

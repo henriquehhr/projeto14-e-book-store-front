@@ -4,12 +4,9 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import UserContext from '../../../contexts/UserContext.js';
-import {
-    $Form,
-    $Button,
-    $Input,
-    $Main,
-} from '../../../globalStyles/globalStyles.js';
+import { $Form, $Button, $Input } from '../../../globalStyles/globalStyles.js';
+
+import { $SignInPage } from './style.js';
 
 export default function LoginPage() {
     const [disabled, setDisabled] = useState(false);
@@ -114,12 +111,12 @@ export default function LoginPage() {
     }, [loginInfo]);
 
     return (
-        <$Main>
-            <h1>Driven-books</h1>
+        <$SignInPage>
+            <h1>DrivenBooks</h1>
             <$Form onSubmit={sendLoginInfo} action="">
                 <$Input
                     className={formErrors.email && isSubmitted ? 'error' : ''}
-                    placeholder="email"
+                    placeholder="Email"
                     type="text"
                     value={loginInfo.email}
                     onChange={(e) =>
@@ -129,13 +126,13 @@ export default function LoginPage() {
                     ref={emailRef}
                 />
                 {formErrors.email && isSubmitted && (
-                    <span style={{ color: 'red' }}>{formErrors.email}</span>
+                    <span className="error-message">{formErrors.email}</span>
                 )}
                 <$Input
                     className={
                         formErrors.password && isSubmitted ? 'error' : ''
                     }
-                    placeholder="senha"
+                    placeholder="Senha"
                     type="password"
                     value={loginInfo.password}
                     onChange={(e) =>
@@ -145,13 +142,22 @@ export default function LoginPage() {
                     ref={passwordRef}
                 />
                 {formErrors.password && isSubmitted && (
-                    <span style={{ color: 'red' }}>{formErrors.password}</span>
+                    <span className="error-message">{formErrors.password}</span>
                 )}
-                <$Button type="submit" className="big" disabled={disabled}>
+                <$Button
+                    type="submit"
+                    className="big inverted-color"
+                    disabled={disabled}
+                >
                     Entrar
                 </$Button>
             </$Form>
-            <p onClick={navigateToSignUp}>Não tem uma conta? Cadastre-se!</p>
-        </$Main>
+            <h2 className="link" onClick={navigateToSignUp}>
+                Não tem uma conta? Cadastre-se!
+            </h2>
+            <h2 className="link" onClick={() => navigate('/')}>
+                Continuar sem Login
+            </h2>
+        </$SignInPage>
     );
 }

@@ -10,6 +10,8 @@ import {
     $Main,
 } from '../../../globalStyles/globalStyles.js';
 
+import { $SignUpPage } from './style.js';
+
 export default function SignUpPage() {
     const [disabled, setDisabled] = useState(false);
     const [singupInfo, setSingupInfo] = useState({
@@ -111,12 +113,12 @@ export default function SignUpPage() {
     }, [singupInfo]);
 
     return (
-        <$Main>
+        <$SignUpPage>
             <h1>Driven-books</h1>
             <$Form onSubmit={sendSingupInfo} action="">
                 <$Input
                     className={formErrors.name && isSubmitted ? 'error' : ''}
-                    placeholder="nome"
+                    placeholder="Nome"
                     type="text"
                     value={singupInfo.name}
                     onChange={(e) =>
@@ -126,11 +128,11 @@ export default function SignUpPage() {
                     ref={nameRef}
                 />
                 {isSubmitted && formErrors.name && (
-                    <span style={{ color: 'red' }}>{formErrors.name}</span>
+                    <span className="error-message">{formErrors.name}</span>
                 )}
                 <$Input
                     className={formErrors.email && isSubmitted ? 'error' : ''}
-                    placeholder="email"
+                    placeholder="Email"
                     type="text"
                     value={singupInfo.email}
                     onChange={(e) =>
@@ -140,13 +142,13 @@ export default function SignUpPage() {
                     ref={emailRef}
                 />
                 {isSubmitted && formErrors.email && (
-                    <span style={{ color: 'red' }}>{formErrors.email}</span>
+                    <span className="error-message">{formErrors.email}</span>
                 )}
                 <$Input
                     className={
                         formErrors.password && isSubmitted ? 'error' : ''
                     }
-                    placeholder="senha"
+                    placeholder="Senha"
                     type="password"
                     value={singupInfo.password}
                     onChange={(e) =>
@@ -159,13 +161,13 @@ export default function SignUpPage() {
                     ref={passwordRef}
                 />
                 {isSubmitted && formErrors.password && (
-                    <span style={{ color: 'red' }}>{formErrors.password}</span>
+                    <span className="error-message">{formErrors.password}</span>
                 )}
                 <$Input
                     className={
                         formErrors.passwordConfirm && isSubmitted ? 'error' : ''
                     }
-                    placeholder="confirmar senha"
+                    placeholder="Confirmar senha"
                     type="password"
                     value={singupInfo.passwordConfirm}
                     onChange={(e) =>
@@ -178,15 +180,24 @@ export default function SignUpPage() {
                     ref={passwordConfirmRef}
                 />
                 {isSubmitted && formErrors.passwordConfirm && (
-                    <span style={{ color: 'red' }}>
+                    <span className="error-message">
                         {formErrors.passwordConfirm}
                     </span>
                 )}
-                <$Button type="submit" className="big" disabled={disabled}>
+                <$Button
+                    type="submit "
+                    className="big inverted-color"
+                    disabled={disabled}
+                >
                     Cadastrar
                 </$Button>
             </$Form>
-            <p onClick={navigateToSignIn}>Já tem uma conta? Faça login!</p>
-        </$Main>
+            <h2 className="link" onClick={navigateToSignIn}>
+                <p>Já tem uma conta? Faça login!</p>
+            </h2>
+            <h2 className="link" onClick={() => navigate('/')}>
+                Continuar sem cadastro
+            </h2>
+        </$SignUpPage>
     );
 }

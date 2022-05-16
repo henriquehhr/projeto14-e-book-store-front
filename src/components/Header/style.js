@@ -7,14 +7,14 @@ export const $Header = styled.header`
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #ffc0cb;
+    background-color: #ffc2da;
     box-shadow: 0px 0px 5px #000000;
 
     .title {
         font-size: 2.5rem;
         font-weight: bold;
         font-family: 'Saira Stencil One', cursive;
-        color: #ff6f9c;
+        color: #ff4791;
     }
 
     .link {
@@ -35,10 +35,10 @@ export const $Header = styled.header`
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        background: #ff6f9c;
+        background: #ff4791;
 
         &:hover {
-            background: #ffd0cb;
+            background: #ff85b6;
         }
 
         .dropdown-menu {
@@ -47,7 +47,7 @@ export const $Header = styled.header`
             top: 100px;
             right: 10px;
             width: 200px;
-            background-color: #ff6f9c;
+            background-color: #ff4791;
             border-radius: 4px;
             box-shadow: 0px 0px 5px #000000;
 
@@ -69,7 +69,7 @@ export const $Header = styled.header`
                     transition: all 0.2s ease-in-out;
 
                     &:hover {
-                        background-color: #ffd0cb;
+                        background-color: #ff85b6;
                     }
                 }
             }
