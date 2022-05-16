@@ -54,14 +54,15 @@ export default function Header() {
                         <li>
                             <span className="greeting">
                                 Olá,{' '}
-                                {userName.current
-                                    .split(' ')
-                                    .map(
-                                        (elem) =>
-                                            elem[0].toUpperCase() +
-                                            elem.slice(1)
-                                    )
-                                    .join(' ')}
+                                {
+                                    userName.current
+                                        .split(' ')
+                                        .map(
+                                            (elem) =>
+                                                elem[0].toUpperCase() +
+                                                elem.slice(1)
+                                        )[0]
+                                }
                             </span>
                         </li>
                         <li>
