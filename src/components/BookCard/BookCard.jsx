@@ -11,30 +11,43 @@ export default function BookCard(props) {
     const navigate = useNavigate();
     const { authToken } = useContext(UserContext);
 
-    function addToCart(bookId) {
+    function addToCart(book) {
         console.log(authToken);
         if (authToken.current) {
             const header = {
                 headers: { Authorization: `Bearer ${authToken.current}` },
             };
-            const booksId = [bookId];
+            const booksId = [book._id];
             const promisse = axios.post(
                 'http://localhost:5000/shopping-carts',
                 { booksId },
                 header
             );
-            promisse.then((response) => console.log(response.data));
+            //promisse.then((response) => console.log(response.data));
+            promisse.then((response) => {
+                if (response.status == 204) {
+                    alert('Você já comprou esse livro!');
+                } else if (response.status == 206) {
+                    alert('Esse livro já está no seu carrinho');
+                }
+            });
             return;
         }
         const localStorageCartJSON = localStorage.getItem('local storage cart');
         let localStorageCart = localStorageCartJSON
             ? JSON.parse(localStorageCartJSON)
             : [];
-        localStorageCart.push(bookId);
-        localStorage.setItem(
-            'local storage cart',
-            JSON.stringify(localStorageCart)
-        );
+        if (
+            !localStorageCart.find(
+                (localStorageBook) => localStorageBook._id == book._id
+            )
+        ) {
+            localStorageCart.push(book);
+            localStorage.setItem(
+                'local storage cart',
+                JSON.stringify(localStorageCart)
+            );
+        }
     }
 
     return (
@@ -66,7 +79,7 @@ export default function BookCard(props) {
             <BsCartPlus
                 onClick={(e) => {
                     e.stopPropagation();
-                    addToCart(book._id);
+                    addToCart(book);
                 }}
                 className=" add-to-cart"
             />

@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-pascal-case */
 import { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import {
@@ -23,6 +23,7 @@ export default function SignUpPage() {
     const [formErrors, setFormErrors] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const emailRef = useRef(null);
     const nameRef = useRef(null);
@@ -59,7 +60,11 @@ export default function SignUpPage() {
                 password: singupInfo.password,
             };
             const promisse = axios.post(url, body);
-            promisse.then(() => navigate('/login'));
+            promisse.then(() => {
+                if (location.state)
+                    navigate('/login', { state: { checkout: true } });
+                else navigate('/login');
+            });
             promisse.catch((error) => {
                 setDisabled(false);
                 alert(error.response.data);
@@ -96,6 +101,11 @@ export default function SignUpPage() {
         }
 
         return errors;
+    }
+
+    function navigateToSignIn() {
+        if (location.state) navigate('/login', { state: { checkout: true } });
+        else navigate('/login');
     }
 
     useEffect(() => {
@@ -182,7 +192,7 @@ export default function SignUpPage() {
                     Cadastrar
                 </$Button>
             </$Form>
-            <h2 className="link" onClick={() => navigate('/login')}>
+            <h2 className="link" onClick={navigateToSignIn}>
                 <p>Já tem uma conta? Faça login!</p>
             </h2>
             <h2 className="link" onClick={() => navigate('/')}>

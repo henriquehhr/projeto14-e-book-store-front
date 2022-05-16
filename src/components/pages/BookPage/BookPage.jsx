@@ -3,6 +3,7 @@ import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import UserContext from '../../../contexts/UserContext.js';
 import { $Button } from '../../../globalStyles/globalStyles.js';
 import { $BookPage } from './style.js';
 import LoadingScreen from '../../LoadingScreen/LoadingScreen.jsx';
@@ -10,22 +11,60 @@ import LoadingScreen from '../../LoadingScreen/LoadingScreen.jsx';
 export default function BookPage() {
     const { idLivro } = useParams();
     const [book, setBook] = useState(null);
+    const [disabled, setDisabled] = useState(false);
+    const { authToken } = useContext(UserContext);
 
     function getBook() {
         const url = `http://localhost:5000/books/${idLivro}`;
-        const promise = axios.get(url);
+        let promise;
+        if (authToken.current) {
+            const header = {
+                headers: { Authorization: `Bearer ${authToken.current}` },
+            };
+            promise = axios.get(url, header);
+        } else {
+            promise = axios.get(url);
+        }
         promise
             .then((response) => {
                 setBook(response.data);
+                if (response.status == 207) setDisabled(true);
             })
             .catch(() => {
                 alert('Erro ao buscar o livro');
             });
     }
 
-    function addToCart() {
-        // TODO: falta implementar o carrinho
-        console.log('Added to cart');
+    function addToCart(book) {
+        console.log(authToken);
+        if (authToken.current) {
+            const header = {
+                headers: { Authorization: `Bearer ${authToken.current}` },
+            };
+            const booksId = [book._id];
+            const promisse = axios.post(
+                'http://localhost:5000/shopping-carts',
+                { booksId },
+                header
+            );
+            promisse.then((response) => console.log(response.data));
+            return;
+        }
+        const localStorageCartJSON = localStorage.getItem('local storage cart');
+        let localStorageCart = localStorageCartJSON
+            ? JSON.parse(localStorageCartJSON)
+            : [];
+        if (
+            !localStorageCart.find(
+                (localStorageBook) => localStorageBook._id == book._id
+            )
+        ) {
+            localStorageCart.push(book);
+            localStorage.setItem(
+                'local storage cart',
+                JSON.stringify(localStorageCart)
+            );
+        }
     }
 
     useEffect(
@@ -47,10 +86,13 @@ export default function BookPage() {
                         <p>{book.description}</p>
                         <p>Nº Paginas: {book.pages}</p>
                         <$Button
-                            onClick={() => addToCart()}
+                            disabled={disabled}
+                            onClick={() => addToCart(book)}
                             className="small add-to-cart"
                         >
-                            Adicionar ao Carrinho
+                            {disabled
+                                ? 'Você já comprou esse livro'
+                                : 'Adicionar ao Carrinho'}
                         </$Button>
                     </div>
                 </$BookPage>

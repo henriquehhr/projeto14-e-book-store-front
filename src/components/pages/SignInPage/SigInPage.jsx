@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-pascal-case */
 import { useEffect, useState, useContext, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import UserContext from '../../../contexts/UserContext.js';
@@ -17,6 +17,7 @@ export default function LoginPage() {
     const [formErrors, setFormErrors] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
     const { authToken } = useContext(UserContext);
 
     const emailRef = useRef(null);
@@ -59,14 +60,21 @@ export default function LoginPage() {
                     };
                     const promisse = axios.post(
                         'http://localhost:5000/shopping-carts',
-                        { booksId: localStorageCart },
+                        { booksId: localStorageCart.map((book) => book._id) },
                         header
                     );
-                    promisse.then(() =>
-                        localStorage.removeItem('local storage cart')
-                    );
+                    promisse.then(() => {
+                        localStorage.removeItem('local storage cart');
+                        console.log(location.state);
+                        if (location.state) {
+                            navigate('/carrinho');
+                        } else {
+                            navigate('/');
+                        }
+                    });
+                } else {
+                    navigate('/');
                 }
-                navigate('/');
             });
             promisse.catch(() => {
                 setDisabled(false);
@@ -90,6 +98,12 @@ export default function LoginPage() {
         }
 
         return errors;
+    }
+
+    function navigateToSignUp() {
+        if (location.state)
+            navigate('/cadastro', { state: { checkout: true } });
+        else navigate('/cadastro');
     }
 
     useEffect(() => {
@@ -138,7 +152,7 @@ export default function LoginPage() {
                     Entrar
                 </$Button>
             </$Form>
-            <h2 className="link" onClick={() => navigate('/cadastro')}>
+            <h2 className="link" onClick={navigateToSignUp}>
                 Não tem uma conta? Cadastre-se!
             </h2>
             <h2 className="link" onClick={() => navigate('/')}>
