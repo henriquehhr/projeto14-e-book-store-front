@@ -14,7 +14,7 @@ export default function HomePage() {
     const [bestSellers, setBestSellers] = useState(null);
 
     function getBooks() {
-        const url = `http://localhost:5000/books`;
+        const url = `https://driven-books.herokuapp.com/books`;
         const promise = axios.get(url);
         promise
             .then((response) => {
@@ -26,7 +26,7 @@ export default function HomePage() {
     }
 
     function getKinds() {
-        const url = `http://localhost:5000/kinds`;
+        const url = `https://driven-books.herokuapp.com/kinds`;
         const promise = axios.get(url);
         promise
             .then((response) => {
@@ -39,7 +39,7 @@ export default function HomePage() {
     }
 
     function getBestSellers() {
-        const url = `http://localhost:5000/best-selling`;
+        const url = `https://driven-books.herokuapp.com/best-selling`;
         const promise = axios.get(url);
         promise
             .then((response) => {

@@ -20,7 +20,7 @@ export default function BookPage() {
     const [collapsedDescription, setCollasedDescription] = useState(true);
 
     function getBook() {
-        const url = `http://localhost:5000/books/${idLivro}`;
+        const url = `https://driven-books.herokuapp.com/books/${idLivro}`;
         let promise;
         if (authToken.current) {
             const header = {
@@ -60,7 +60,7 @@ export default function BookPage() {
             };
             const booksId = [book._id];
             const promisse = axios.post(
-                'http://localhost:5000/shopping-carts',
+                'https://driven-books.herokuapp.com/shopping-carts',
                 { booksId },
                 header
             );
@@ -92,7 +92,7 @@ export default function BookPage() {
                 data: { bookId: bookToRemove._id.toString() },
             };
             const promisse = axios.delete(
-                'http://localhost:5000/shopping-carts',
+                'https://driven-books.herokuapp.com/shopping-carts',
                 config
             );
         } else {
