@@ -36,6 +36,12 @@ export const $BookPage = styled.div`
         }
     }
 
+    button {
+        :disabled {
+            background-color: gray;
+        }
+    }
+
     @media (max-width: 600px) {
         flex-direction: column-reverse;
         align-items: center;

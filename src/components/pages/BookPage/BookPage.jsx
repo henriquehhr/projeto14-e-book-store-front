@@ -11,14 +11,24 @@ import LoadingScreen from '../../LoadingScreen/LoadingScreen.jsx';
 export default function BookPage() {
     const { idLivro } = useParams();
     const [book, setBook] = useState(null);
+    const [disabled, setDisabled] = useState(false);
     const { authToken } = useContext(UserContext);
 
     function getBook() {
         const url = `http://localhost:5000/books/${idLivro}`;
-        const promise = axios.get(url);
+        let promise;
+        if (authToken.current) {
+            const header = {
+                headers: { Authorization: `Bearer ${authToken.current}` },
+            };
+            promise = axios.get(url, header);
+        } else {
+            promise = axios.get(url);
+        }
         promise
             .then((response) => {
                 setBook(response.data);
+                if (response.status == 207) setDisabled(true);
             })
             .catch(() => {
                 alert('Erro ao buscar o livro');
@@ -76,10 +86,13 @@ export default function BookPage() {
                         <p>{book.description}</p>
                         <p>Nº Paginas: {book.pages}</p>
                         <$Button
+                            disabled={disabled}
                             onClick={() => addToCart(book)}
                             className="small add-to-cart"
                         >
-                            Adicionar ao Carrinho
+                            {disabled
+                                ? 'Você já comprou esse livro'
+                                : 'Adicionar ao Carrinho'}
                         </$Button>
                     </div>
                 </$BookPage>
