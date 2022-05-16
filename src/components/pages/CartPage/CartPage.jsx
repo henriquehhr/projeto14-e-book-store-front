@@ -83,11 +83,11 @@ export default function CartPage() {
     }
 
     function signIn() {
-        navigate('/login', { state: { chekout: true } });
+        navigate('/login', { state: { checkout: true } });
     }
 
     function signUp() {
-        navigate('/cadastro', { state: { chekout: true } });
+        navigate('/cadastro', { state: { checkout: true } });
     }
 
     return (
@@ -128,7 +128,8 @@ export default function CartPage() {
                             </div>
                         ))}
                     </ul>
-                    <button onClick={signIn}>Comprar</button>
+                    <button onClick={signIn}>Faça login</button>
+                    <button onClick={signUp}>Castre-se</button>
                 </div>
             ) : (
                 <>Os livros escolhidos para compra ficarão aqui!</>
