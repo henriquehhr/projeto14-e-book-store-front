@@ -1,36 +1,18 @@
-import { useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
-
-import UserContext from '../../../contexts/UserContext.js';
-import { $CheckOutPage } from './style.js';
+import { $Success } from './style.js';
 
 export default function CartPage() {
     const navigate = useNavigate();
-    const { authToken } = useContext(UserContext);
     const {
         state: { books, totalPrice },
     } = useLocation();
 
-    function checkout() {
-        const header = {
-            headers: { Authorization: `Bearer ${authToken.current}` },
-        };
-        const promisse = axios.post(
-            'http://localhost:5000/checkout',
-            { payment: 'teste' },
-            header
-        );
-        promisse
-            .then(() => navigate('/sucesso', { state: { books, totalPrice } }))
-            .catch(() => console.log('erro ao efetuar compra'));
-    }
-
     return (
-        <$CheckOutPage>
+        <$Success>
             <div>
                 <ul>
-                    <h1 className="label">Confira os itens</h1>
+                    <h1 className="label">Compra finalizada com sucesso! </h1>
+                    <h2>Resumo da compra:</h2>
                     {books.map((book) => (
                         <div className="book-container" key={book._id}>
                             <div className="info-container">
@@ -62,13 +44,15 @@ export default function CartPage() {
                 </ul>
                 <div className="checkout">
                     <p className="price">Total: R$ {totalPrice.toFixed(2)}</p>
-
-                    <button onClick={checkout}>Finalizar compra</button>
                 </div>
-                <p className="link" onClick={() => navigate(-1)}>
-                    Editar o carrinho
+                <h2>
+                    Você receberá um em seu email a confirmção da compra. Caso
+                    não encontre, procure na caixa de spam ;)
+                </h2>
+                <p className="link" onClick={() => navigate('/')}>
+                    Voltar para a loja
                 </p>
             </div>
-        </$CheckOutPage>
+        </$Success>
     );
 }

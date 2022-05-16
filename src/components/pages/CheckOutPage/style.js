@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const $CartPage = styled.main`
+export const $CheckOutPage = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -8,6 +8,8 @@ import HomePage from '../pages/HomePage/HomePage.jsx';
 import BookPage from '../pages/BookPage/BookPage.jsx';
 import CartPage from '../pages/CartPage/CartPage.jsx';
 import Header from '../Header/Header.jsx';
+import CheckOutPage from '../pages/CheckOutPage/CheckOutPage.jsx';
+import Success from '../pages/Success/Success.jsx';
 import '../../assets/reset.css';
 import '../../assets/style.css';
 
@@ -49,10 +51,8 @@ export default function App() {
                 <Route path="/cadastro" element={<SignUpPage />} />
                 <Route path="/livro/:idLivro" element={<BookPage />} />
                 <Route path="/carrinho" element={<CartPage />} />
-                <Route
-                    path="/finalizar-compra"
-                    element={<>Finalizar compra</>}
-                />
+                <Route path="/finalizar-compra" element={<CheckOutPage />} />
+                <Route path="/sucesso" element={<Success />} />
             </Routes>
         </UserContext.Provider>
     );
