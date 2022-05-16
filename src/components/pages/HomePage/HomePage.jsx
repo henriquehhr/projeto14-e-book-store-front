@@ -1,18 +1,16 @@
 /* eslint-disable react/jsx-pascal-case */
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { $HomePage } from './style.js';
 import Carrousel from '../../Carroussel/Carroussel.jsx';
 import BookCard from '../../BookCard/BookCard.jsx';
+import LoadingScreen from '../../LoadingScreen/LoadingScreen.jsx';
 
 export default function HomePage() {
     const [books, setBooks] = useState(null);
     const [kinds, setKinds] = useState(null);
     const [currentKind, setCurrentKind] = useState(null);
-    const carrouselRef1 = useRef(null);
-    const carrouselRef2 = useRef(null);
-    const carrouselRef3 = useRef(null);
 
     function getBooks() {
         const url = `http://localhost:5000/books`;
@@ -53,7 +51,7 @@ export default function HomePage() {
             {books ? (
                 <$HomePage>
                     <h1 className="label">Promoções</h1>
-                    <Carrousel carrouselRef={carrouselRef1}>
+                    <Carrousel>
                         {books
                             .filter((book) => book.price < book.oldPrice)
                             .map((book) => (
@@ -77,7 +75,7 @@ export default function HomePage() {
                             </h1>
                         ))}
                     </div>
-                    <Carrousel carrouselRef={carrouselRef2}>
+                    <Carrousel>
                         {books
                             .filter((book) => book.kind === currentKind?._id)
                             .map((book) => (
@@ -86,14 +84,14 @@ export default function HomePage() {
                     </Carrousel>
 
                     <h1 className="label">Todos os Livros</h1>
-                    <Carrousel carrouselRef={carrouselRef3}>
+                    <Carrousel>
                         {books.map((book) => (
                             <BookCard book={book} key={book._id} />
                         ))}
                     </Carrousel>
                 </$HomePage>
             ) : (
-                <h1>Carregando...</h1>
+                <LoadingScreen />
             )}
         </>
     );
