@@ -68,6 +68,10 @@ export const $BookPage = styled.div`
         :disabled {
             background-color: gray;
         }
+
+        &.already-in-cart {
+            background-color: #ffc2da;
+        }
     }
 
     @media (max-width: 600px) {
