@@ -113,7 +113,6 @@ export default function CartPage() {
                                     <p>{book.author}</p>
                                     <br />
                                     <p>
-                                        Preço:{' '}
                                         <span className="old-price">
                                             {book.oldPrice > book.price &&
                                                 book.oldPrice.toLocaleString(
@@ -150,10 +149,13 @@ export default function CartPage() {
                         ) : (
                             <div className="signInUp">
                                 <button onClick={signIn}>Faça login</button>
-                                <button onClick={signUp}>Castre-se</button>
+                                <button onClick={signUp}>Cadastre-se</button>
                             </div>
                         )}
                     </div>
+                    <p className="link" onClick={() => navigate('/')}>
+                        Continuar comprando...
+                    </p>
                 </div>
             ) : (
                 <>Os livros escolhidos para compra ficarão aqui!</>
