@@ -103,6 +103,12 @@ export default function LoginPage() {
         return errors;
     }
 
+    function navigateToSignUp() {
+        if (location.state)
+            navigate('/cadastro', { state: { checkout: true } });
+        else navigate('/cadastro');
+    }
+
     useEffect(() => {
         setFormErrors(validate(loginInfo));
     }, [loginInfo]);
@@ -145,9 +151,7 @@ export default function LoginPage() {
                     Entrar
                 </$Button>
             </$Form>
-            <Link to="/cadastro">
-                <p>Não tem uma conta? Cadastre-se!</p>
-            </Link>
+            <p onClick={navigateToSignUp}>Não tem uma conta? Cadastre-se!</p>
         </$Main>
     );
 }

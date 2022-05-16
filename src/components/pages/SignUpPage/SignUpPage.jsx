@@ -101,6 +101,11 @@ export default function SignUpPage() {
         return errors;
     }
 
+    function navigateToSignIn() {
+        if (location.state) navigate('/login', { state: { checkout: true } });
+        else navigate('/login');
+    }
+
     useEffect(() => {
         setFormErrors(validate(singupInfo));
     }, [singupInfo]);
@@ -181,9 +186,7 @@ export default function SignUpPage() {
                     Cadastrar
                 </$Button>
             </$Form>
-            <Link to="/login">
-                <p>Já tem uma conta? Faça login!</p>
-            </Link>
+            <p onClick={navigateToSignIn}>Já tem uma conta? Faça login!</p>
         </$Main>
     );
 }
