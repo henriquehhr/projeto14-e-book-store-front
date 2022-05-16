@@ -22,6 +22,20 @@ export const $Header = styled.header`
         text-decoration: none;
     }
 
+    .cart-icon {
+        position: relative;
+        .cart-quantity {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            font-size: 12px;
+            border-radius: 50%;
+            padding: 6px;
+            background-color: #ff85b6;
+            color: black;
+        }
+    }
+
     .item {
         position: relative;
         text-decoration: none;

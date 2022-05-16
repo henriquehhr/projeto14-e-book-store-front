@@ -8,7 +8,7 @@ import { $CartPage } from './style.js';
 
 export default function CartPage() {
     const navigate = useNavigate();
-    const { authToken } = useContext(UserContext);
+    const { authToken, cart, setCart } = useContext(UserContext);
     const [books, setBooks] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -57,6 +57,9 @@ export default function CartPage() {
                 'https://driven-books.herokuapp.com/shopping-carts',
                 config
             );
+            promisse.then(() =>
+                setCart(cart.filter((book) => book._id != bookToRemove._id))
+            );
         } else {
             let localStorageCartJSON =
                 localStorage.getItem('local storage cart');
@@ -66,6 +69,7 @@ export default function CartPage() {
             localStorageCartJSON = JSON.stringify(
                 localStorageCart.filter((book) => book._id != bookToRemove._id)
             );
+            setCart([...JSON.parse(localStorageCartJSON)]);
             localStorage.setItem('local storage cart', localStorageCartJSON);
         }
     }

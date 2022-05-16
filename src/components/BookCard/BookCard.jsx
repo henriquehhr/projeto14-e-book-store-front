@@ -5,14 +5,14 @@ import { BsCartPlus } from 'react-icons/bs';
 
 import UserContext from '../../contexts/UserContext.js';
 import { $BookCard } from './style.js';
+import CartPage from '../pages/CartPage/CartPage.jsx';
 
 export default function BookCard(props) {
     const { book } = props;
     const navigate = useNavigate();
-    const { authToken } = useContext(UserContext);
+    const { authToken, cart, setCart } = useContext(UserContext);
 
     function addToCart(book) {
-        console.log(authToken);
         if (authToken.current) {
             const header = {
                 headers: { Authorization: `Bearer ${authToken.current}` },
@@ -23,12 +23,13 @@ export default function BookCard(props) {
                 { booksId },
                 header
             );
-            //promisse.then((response) => console.log(response.data));
             promisse.then((response) => {
                 if (response.status == 204) {
                     alert('Você já comprou esse livro!');
                 } else if (response.status == 206) {
                     alert('Esse livro já está no seu carrinho');
+                } else if (response.status == 200) {
+                    setCart([...cart, book]);
                 }
             });
             return;
@@ -43,6 +44,7 @@ export default function BookCard(props) {
             )
         ) {
             localStorageCart.push(book);
+            setCart([...localStorageCart]);
             localStorage.setItem(
                 'local storage cart',
                 JSON.stringify(localStorageCart)

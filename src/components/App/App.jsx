@@ -18,10 +18,11 @@ export default function App() {
     const localUserName = localStorage.getItem('username');
     const authToken = useRef(localToken ? JSON.parse(localToken) : null);
     const userName = useRef(localUserName ? JSON.parse(localUserName) : null);
+    const [cart, setCart] = useState([]);
 
     const navigate = useNavigate();
     const location = useLocation();
-    const contextValue = { authToken, userName };
+    const contextValue = { authToken, userName, cart, setCart };
 
     useEffect(() => {
         //TODO checar se o authToken é válido

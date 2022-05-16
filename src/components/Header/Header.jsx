@@ -1,16 +1,17 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
     AiOutlineShopping,
     AiOutlineUser,
     AiOutlineLogin,
 } from 'react-icons/ai';
+import axios from 'axios';
 
 import UserContext from '../../contexts/UserContext.js';
 import { $Header } from './style.js';
 
 export default function Header() {
-    const { authToken, userName } = useContext(UserContext);
+    const { authToken, userName, cart, setCart } = useContext(UserContext);
     const [currentDropdown, setCurrentDropdown] = useState(null);
     const navigate = useNavigate();
 
@@ -19,6 +20,28 @@ export default function Header() {
         navigate('/');
         window.location.reload();
     }
+
+    useEffect(() => {
+        if (authToken.current) {
+            const header = {
+                headers: { Authorization: `Bearer ${authToken.current}` },
+            };
+            const promisse = axios.get(
+                'http://localhost:5000/shopping-carts',
+                header
+            );
+            promisse.then((response) => {
+                setCart(response.data);
+            });
+        } else {
+            const localStorageCartJSON =
+                localStorage.getItem('local storage cart');
+            let localStorageCart = localStorageCartJSON
+                ? JSON.parse(localStorageCartJSON)
+                : [];
+            setCart(localStorageCart);
+        }
+    }, []);
 
     return (
         <$Header>
@@ -54,7 +77,7 @@ export default function Header() {
                                 </li>
                             </DropdownMenu>
                         </li>
-                        <li>
+                        <li className="cart-icon">
                             <DropdownMenu
                                 currentDropdown={currentDropdown}
                                 setCurrentDropdown={setCurrentDropdown}
@@ -68,6 +91,9 @@ export default function Header() {
                                     Meu Carrinho
                                 </li>
                             </DropdownMenu>
+                            {cart.length > 0 && (
+                                <p className="cart-quantity">{cart.length}</p>
+                            )}
                         </li>
                     </ul>
                 </nav>
@@ -95,7 +121,7 @@ export default function Header() {
                                 </li>
                             </DropdownMenu>
                         </li>
-                        <li>
+                        <li className="cart-icon">
                             <DropdownMenu
                                 currentDropdown={currentDropdown}
                                 setCurrentDropdown={setCurrentDropdown}
@@ -109,6 +135,9 @@ export default function Header() {
                                     Carrinho
                                 </li>
                             </DropdownMenu>
+                            {cart.length > 0 && (
+                                <p className="cart-quantity">{cart.length}</p>
+                            )}
                         </li>
                     </ul>
                 </nav>
