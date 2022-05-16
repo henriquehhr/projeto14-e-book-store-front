@@ -15,6 +15,7 @@ export default function BookPage() {
     const [disabled, setDisabled] = useState(false);
     const [bookAlreadyInCart, setBookAlreadyInCart] = useState(false);
     const { authToken } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const [collapsedDescription, setCollasedDescription] = useState(true);
 
@@ -117,56 +118,65 @@ export default function BookPage() {
         <>
             {book ? (
                 <$BookPage>
-                    <img src={book.cover} alt={`${book.name} cover`} />
-                    <div className="info-container">
-                        <h1>{book.name}</h1>
-                        <p>{book.author}</p>
-                        <p
-                            className={
-                                collapsedDescription
-                                    ? 'description collapsed-description'
-                                    : 'description '
-                            }
-                        >
-                            {book.description}
-                        </p>
-                        <p
-                            className="reed-more"
-                            onClick={() =>
-                                setCollasedDescription(!collapsedDescription)
-                            }
-                        >
-                            {collapsedDescription ? 'Ler mais' : 'Ler menos'}
-                        </p>
+                    <$Button className="big back" onClick={() => navigate(-1)}>
+                        Voltar
+                    </$Button>
+                    <div className="book">
+                        <img src={book.cover} alt={`${book.name} cover`} />
+                        <div className="info-container">
+                            <h1>{book.name}</h1>
+                            <p>{book.author}</p>
+                            <p
+                                className={
+                                    collapsedDescription
+                                        ? 'description collapsed-description'
+                                        : 'description '
+                                }
+                            >
+                                {book.description}
+                            </p>
+                            <p
+                                className="reed-more"
+                                onClick={() =>
+                                    setCollasedDescription(
+                                        !collapsedDescription
+                                    )
+                                }
+                            >
+                                {collapsedDescription
+                                    ? 'Ler mais'
+                                    : 'Ler menos'}
+                            </p>
 
-                        <p>Nº Paginas: {book.pages}</p>
-                        <p>
-                            <span className="old-price">
-                                {book.oldPrice > book.price &&
-                                    book.oldPrice.toLocaleString('pt-br', {
-                                        style: 'currency',
-                                        currency: 'BRL',
-                                    })}
-                            </span>{' '}
-                            {book.price.toLocaleString('pt-br', {
-                                style: 'currency',
-                                currency: 'BRL',
-                            })}
-                        </p>
-                        <$Button
-                            disabled={disabled}
-                            onClick={() => addToCart(book)}
-                            className={
-                                bookAlreadyInCart
-                                    ? 'already-in-cart small add-to-cart'
-                                    : 'small add-to-cart'
-                            }
-                        >
-                            {disabled ? 'Você já tem esse livro' : ''}
-                            {bookAlreadyInCart
-                                ? 'Remover do carrinho'
-                                : 'Adicionar ao Carrinho'}
-                        </$Button>
+                            <p>Nº Paginas: {book.pages}</p>
+                            <p>
+                                <span className="old-price">
+                                    {book.oldPrice > book.price &&
+                                        book.oldPrice.toLocaleString('pt-br', {
+                                            style: 'currency',
+                                            currency: 'BRL',
+                                        })}
+                                </span>{' '}
+                                {book.price.toLocaleString('pt-br', {
+                                    style: 'currency',
+                                    currency: 'BRL',
+                                })}
+                            </p>
+                            <$Button
+                                disabled={disabled}
+                                onClick={() => addToCart(book)}
+                                className={
+                                    bookAlreadyInCart
+                                        ? 'already-in-cart small add-to-cart'
+                                        : 'small add-to-cart'
+                                }
+                            >
+                                {disabled ? 'Você já tem esse livro' : ''}
+                                {bookAlreadyInCart
+                                    ? 'Remover do carrinho'
+                                    : 'Adicionar ao Carrinho'}
+                            </$Button>
+                        </div>
                     </div>
                 </$BookPage>
             ) : (
