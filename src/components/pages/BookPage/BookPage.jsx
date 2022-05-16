@@ -14,7 +14,7 @@ export default function BookPage() {
     const [book, setBook] = useState(null);
     const [disabled, setDisabled] = useState(false);
     const [bookAlreadyInCart, setBookAlreadyInCart] = useState(false);
-    const { authToken } = useContext(UserContext);
+    const { authToken, cart, setCart } = useContext(UserContext);
     const navigate = useNavigate();
 
     const [collapsedDescription, setCollasedDescription] = useState(true);
@@ -64,7 +64,7 @@ export default function BookPage() {
                 { booksId },
                 header
             );
-            promisse.then((response) => console.log(response.data));
+            promisse.then((response) => setCart([...cart, book]));
             return;
         }
         const localStorageCartJSON = localStorage.getItem('local storage cart');
@@ -77,6 +77,7 @@ export default function BookPage() {
             )
         ) {
             localStorageCart.push(book);
+            setCart([...localStorageCart]);
             localStorage.setItem(
                 'local storage cart',
                 JSON.stringify(localStorageCart)
@@ -95,6 +96,9 @@ export default function BookPage() {
                 'http://localhost:5000/shopping-carts',
                 config
             );
+            promisse.then(() =>
+                setCart(cart.filter((book) => book._id != bookToRemove._id))
+            );
         } else {
             let localStorageCartJSON =
                 localStorage.getItem('local storage cart');
@@ -104,6 +108,7 @@ export default function BookPage() {
             localStorageCartJSON = JSON.stringify(
                 localStorageCart.filter((book) => book._id != bookToRemove._id)
             );
+            setCart([...JSON.parse(localStorageCartJSON)]);
             localStorage.setItem('local storage cart', localStorageCartJSON);
         }
     }
