@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/henriquehhr/projeto14-e-book-store-front">
-    <img src="./public/img/books-128.png" alt="readme-logo" width="80" height="80">
+    <img src="./public/img/book-128.png" alt="readme-logo" width="80" height="80">
   </a>
 
   <h3 align="center">
