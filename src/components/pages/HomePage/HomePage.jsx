@@ -5,6 +5,7 @@ import axios from 'axios';
 import { $HomePage } from './style.js';
 import Carrousel from '../../Carroussel/Carroussel.jsx';
 import BookCard from '../../BookCard/BookCard.jsx';
+import LoadingScreen from '../../LoadingScreen/LoadingScreen.jsx';
 
 export default function HomePage() {
     const [books, setBooks] = useState(null);
@@ -93,7 +94,7 @@ export default function HomePage() {
                     </Carrousel>
                 </$HomePage>
             ) : (
-                <h1>Carregando...</h1>
+                <LoadingScreen />
             )}
         </>
     );
