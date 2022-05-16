@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import { $Button } from '../../../globalStyles/globalStyles.js';
 import { $BookPage } from './style.js';
+import LoadingScreen from '../../LoadingScreen/LoadingScreen.jsx';
 
 export default function BookPage() {
     const { idLivro } = useParams();
@@ -54,7 +55,7 @@ export default function BookPage() {
                     </div>
                 </$BookPage>
             ) : (
-                <h1>Carregando...</h1>
+                <LoadingScreen />
             )}
         </>
     );
