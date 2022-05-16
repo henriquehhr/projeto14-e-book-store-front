@@ -75,7 +75,7 @@ export default function CartPage() {
             headers: { Authorization: `Bearer ${authToken.current}` },
         };
         const promisse = axios.post(
-            'http://localhost:5000/shopping-carts',
+            'http://localhost:5000/checkout',
             { payment: 'teste' },
             header
         );
@@ -129,7 +129,7 @@ export default function CartPage() {
                         ))}
                     </ul>
                     {authToken.current ? (
-                        <button>Comprar!</button>
+                        <button onClick={checkout}>Comprar!</button>
                     ) : (
                         <>
                             <button onClick={signIn}>Faça login</button>
