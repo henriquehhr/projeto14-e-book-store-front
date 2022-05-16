@@ -1,13 +1,19 @@
 import styled from 'styled-components';
 
 export const $BookPage = styled.div`
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin: 0 auto;
-    padding: 20px;
+    .back {
+        margin: 20px;
+    }
+
+    .book {
+        font-family: 'Roboto', sans-serif;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
     img {
         width: 200px;
