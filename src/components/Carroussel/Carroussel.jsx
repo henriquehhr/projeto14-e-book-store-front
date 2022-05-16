@@ -7,6 +7,7 @@ import useCarrouselScroll from '../../hooks/useCarrouselScroll.js';
 import { $Carroussel } from './style.js';
 
 export default function Carrousel(props) {
+    const { currentKind } = props;
     const carrouselRef = useRef(null);
 
     const [carrouselWidth, setCarrouselWidth] = useState(
@@ -29,7 +30,7 @@ export default function Carrousel(props) {
     useEffect(() => {
         setCarrouselWidth(carrouselRef.current.scrollWidth);
         setCarrouselOffsetWidth(carrouselRef.current.offsetWidth);
-    }, [windowWidth]);
+    }, [windowWidth, currentKind]);
 
     return (
         <$Carroussel>

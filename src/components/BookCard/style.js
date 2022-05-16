@@ -30,11 +30,17 @@ export const $BookCard = styled.div`
         margin-top: 10px;
 
         h1 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
             margin-bottom: 10px;
             align-self: center;
             text-align: center;
+            height: 2.8rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         p {
